@@ -1,4 +1,4 @@
-import 'package:easyjobfrontend/screens/welcome_screen.dart';
+import 'package:easyjobfrontend/features/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
