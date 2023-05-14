@@ -1,4 +1,5 @@
 import 'package:easyjobfrontend/features/student/register_student.dart';
+import 'package:easyjobfrontend/features/teachers/register_teacher.dart';
 import 'package:easyjobfrontend/screens/login/login_screen.dart';
 import 'package:easyjobfrontend/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,7 @@ class WelcomeScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => RegisterStudent()),
+                        MaterialPageRoute(builder: (context) => RegisterTeacher()),
                       );
                     },
                     child: Text(
