@@ -67,6 +67,22 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
+                    height: 10,
+                  ),
+                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    Text(
+                      "Não tem uma conta?",
+                      style: TextStyle(color: title),
+                    ),
+                    TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        "Cadastre-se",
+                        style: TextStyle(color: title, fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ]),
+                  SizedBox(
                     height: 200,
                   ),
                   SizedBox(
