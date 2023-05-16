@@ -39,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
                   height: 150,
                 ),
                 SizedBox(
-                  width: 264,
+                  width: 200,
                   height: 57,
                   child: ElevatedButton(
                     onPressed: () {
@@ -48,9 +48,9 @@ class WelcomeScreen extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => LoginScreen()),
                       );
                     },
-                    child: Text(
-                      'Login',
-                      style: TextStyle(fontSize: 28),
+                    child: const Icon(
+                      Icons.navigate_next,
+                      color: Colors.white,
                     ),
                     style: ElevatedButton.styleFrom(
                       primary: backgroundButton,
