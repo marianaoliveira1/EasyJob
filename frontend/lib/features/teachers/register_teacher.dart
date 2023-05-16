@@ -1,5 +1,7 @@
+import 'package:easyjobfrontend/features/student/home_student.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/default_voltar_button.dart';
 import '../../utils/colors.dart';
 import '../../widgtes/gradient_background.dart';
 
@@ -18,6 +20,10 @@ class RegisterTeacher extends StatelessWidget {
               child: ListView(children: [
                 Column(
                   children: [
+                    SizedBox(
+                      height: 10,
+                    ),
+                    DefaultVoltarButton(),
                     SizedBox(
                       height: 90,
                     ),
@@ -208,38 +214,74 @@ class RegisterTeacher extends StatelessWidget {
                     SizedBox(
                       height: 30,
                     ),
-                    Wrap(
-                      children: [
-                        TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Custo da sua hora por aula (R\$)',
-                            filled: true,
-                            fillColor: Color(0xFF212452),
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Dias da semana',
+                        filled: true,
+                        fillColor: Color(0xFF212452),
+                        hintStyle: TextStyle(
+                          color: Colors.white,
                         ),
-                        TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Custo da sua hora por aula (R\$)',
-                            filled: true,
-                            fillColor: Color(0xFF212452),
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16.0),
-                              borderSide: BorderSide.none,
-                            ),
-                          ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                          borderSide: BorderSide.none,
                         ),
-                      ],
+                      ),
                     ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Horários',
+                        filled: true,
+                        fillColor: Color(0xFF212452),
+                        hintStyle: TextStyle(
+                          color: Colors.white,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                          borderSide: BorderSide.none,
+                        ),
+                      ),
+                    ),
+                    // Container(
+                    //   child: Wrap(
+                    //     children: [
+                    //       TextField(
+                    //         decoration: InputDecoration(
+                    //           hintText: 'Dias da semana',
+                    //           filled: true,
+                    //           fillColor: Color(0xFF212452),
+                    //           hintStyle: TextStyle(
+                    //             color: Colors.white,
+                    //           ),
+                    //           border: OutlineInputBorder(
+                    //             borderRadius: BorderRadius.circular(16.0),
+                    //             borderSide: BorderSide.none,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //         height: 30,
+                    //       ),
+                    //       TextField(
+                    //         decoration: InputDecoration(
+                    //           hintText: 'Horários',
+                    //           filled: true,
+                    //           fillColor: Color(0xFF212452),
+                    //           hintStyle: TextStyle(
+                    //             color: Colors.white,
+                    //           ),
+                    //           border: OutlineInputBorder(
+                    //             borderRadius: BorderRadius.circular(16.0),
+                    //             borderSide: BorderSide.none,
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 80,
                     ),
@@ -248,10 +290,10 @@ class RegisterTeacher extends StatelessWidget {
                       height: 48,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => LoginScreen()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomeScreenStudent()),
+                          );
                         },
                         child: Text(
                           'Cadastrar',

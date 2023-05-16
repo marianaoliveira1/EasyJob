@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/default_voltar_button.dart';
 import '../../utils/colors.dart';
 import '../../widgtes/gradient_background.dart';
+import '../teachers/home_teacher.dart';
 
 class RegisterStudent extends StatelessWidget {
   const RegisterStudent({super.key});
@@ -17,6 +19,10 @@ class RegisterStudent extends StatelessWidget {
             child: Center(
               child: Column(
                 children: [
+                  SizedBox(
+                    height: 10,
+                  ),
+                  DefaultVoltarButton(),
                   SizedBox(
                     height: 150,
                   ),
@@ -91,10 +97,10 @@ class RegisterStudent extends StatelessWidget {
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => LoginScreen()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => HomeScreenStudent()),
+                        );
                       },
                       child: Text(
                         'Fazer login',

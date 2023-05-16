@@ -1,3 +1,5 @@
+import 'package:easyjobfrontend/features/student/register_student.dart';
+import 'package:easyjobfrontend/features/teachers/register_teacher.dart';
 import 'package:easyjobfrontend/widgtes/gradient_background.dart';
 import 'package:flutter/material.dart';
 
@@ -75,7 +77,59 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(color: title),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              backgroundColor: backgroundModal,
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    "Você é um:",
+                                    style: TextStyle(color: title),
+                                  ),
+                                  SizedBox(
+                                    height: 15,
+                                  ),
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => RegisterTeacher()),
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          primary: backgroundButton,
+                                          onPrimary: Colors.white,
+                                        ),
+                                        child: Text('Professor'),
+                                      ),
+                                      SizedBox(width: 16),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(builder: (context) => RegisterStudent()),
+                                          );
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          primary: backgroundButton,
+                                          onPrimary: Colors.white,
+                                        ),
+                                        child: Text('Pais e responsáveis'),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
                       child: Text(
                         "Cadastre-se",
                         style: TextStyle(color: title, fontWeight: FontWeight.bold),
