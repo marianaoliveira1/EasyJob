@@ -72,7 +72,7 @@ class RegisterTeacher extends StatelessWidget {
                     ),
                     TextField(
                       decoration: InputDecoration(
-                        hintText: 'email',
+                        hintText: 'Email',
                         filled: true,
                         fillColor: Color(0xFF212452),
                         hintStyle: TextStyle(
@@ -90,7 +90,7 @@ class RegisterTeacher extends StatelessWidget {
                     TextField(
                       obscureText: true,
                       decoration: InputDecoration(
-                        hintText: 'senha',
+                        hintText: 'Senha',
                         filled: true,
                         fillColor: Color(0xFF212452),
                         hintStyle: TextStyle(
@@ -140,6 +140,9 @@ class RegisterTeacher extends StatelessWidget {
                       height: 20,
                     ),
                     TextField(
+                      minLines: 1, // Set this
+                      maxLines: 6, // and this
+                      keyboardType: TextInputType.multiline,
                       decoration: InputDecoration(
                         hintText: 'Sobre você',
                         filled: true,
@@ -245,43 +248,6 @@ class RegisterTeacher extends StatelessWidget {
                         ),
                       ),
                     ),
-                    // Container(
-                    //   child: Wrap(
-                    //     children: [
-                    //       TextField(
-                    //         decoration: InputDecoration(
-                    //           hintText: 'Dias da semana',
-                    //           filled: true,
-                    //           fillColor: Color(0xFF212452),
-                    //           hintStyle: TextStyle(
-                    //             color: Colors.white,
-                    //           ),
-                    //           border: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(16.0),
-                    //             borderSide: BorderSide.none,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //         height: 30,
-                    //       ),
-                    //       TextField(
-                    //         decoration: InputDecoration(
-                    //           hintText: 'Horários',
-                    //           filled: true,
-                    //           fillColor: Color(0xFF212452),
-                    //           hintStyle: TextStyle(
-                    //             color: Colors.white,
-                    //           ),
-                    //           border: OutlineInputBorder(
-                    //             borderRadius: BorderRadius.circular(16.0),
-                    //             borderSide: BorderSide.none,
-                    //           ),
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   ),
-                    // ),
                     SizedBox(
                       height: 80,
                     ),
