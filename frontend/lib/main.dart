@@ -1,5 +1,6 @@
-import 'package:easyjobfrontend/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'features/student/home_student.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "EasyJob",
       debugShowCheckedModeBanner: false,
-      home: WelcomeScreen(),
+      home: HomeScreenStudent(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../widgtes/card_teacher.dart';
 import '../../widgtes/gradient_background.dart';
 
 class HomeScreenStudent extends StatefulWidget {
@@ -16,6 +17,10 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
       body: Stack(
         children: [
           DefaultBackgroundGradient(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 70.0),
+            child: CardTeacher(),
+          )
         ],
       ),
     );
