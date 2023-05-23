@@ -12,6 +12,13 @@ class HomeScreenStudent extends StatefulWidget {
 }
 
 class _HomeScreenStudentState extends State<HomeScreenStudent> {
+  Map<String, bool> checkBoxValues = {
+    'Matemática': false,
+    'Português': false,
+    'História': false,
+    'Geografia': false,
+    'Produção Textual': false,
+  };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +50,9 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
               ],
             ),
           ),
+          Column(
+            children: [],
+          )
           // CardTeacher()
         ],
       ),
