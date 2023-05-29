@@ -1,5 +1,5 @@
-import 'package:easyjobfrontend/features/student/register_student.dart';
-import 'package:easyjobfrontend/features/teachers/register_teacher.dart';
+import 'package:easyjobfrontend/features/student/screens/register_student.dart';
+import 'package:easyjobfrontend/features/teachers/screens/register_teacher.dart';
 import 'package:easyjobfrontend/widgtes/gradient_background.dart';
 import 'package:flutter/material.dart';
 

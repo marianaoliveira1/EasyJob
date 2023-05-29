@@ -1,9 +1,9 @@
-import 'package:easyjobfrontend/features/student/home_student.dart';
+import 'package:easyjobfrontend/features/student/screens/home_student.dart';
 import 'package:flutter/material.dart';
 
-import '../../utils/default_voltar_button.dart';
-import '../../utils/colors.dart';
-import '../../widgtes/gradient_background.dart';
+import '../../../utils/default_voltar_button.dart';
+import '../../../utils/colors.dart';
+import '../../../widgtes/gradient_background.dart';
 
 class RegisterTeacher extends StatelessWidget {
   const RegisterTeacher({super.key});

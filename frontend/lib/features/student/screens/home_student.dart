@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/colors.dart';
-import '../../widgtes/card_teacher.dart';
-import '../../widgtes/gradient_background.dart';
+import '../../../utils/colors.dart';
+import '../../../widgtes/card_teacher.dart';
+import '../../../widgtes/gradient_background.dart';
 
 class HomeScreenStudent extends StatefulWidget {
   const HomeScreenStudent({super.key});

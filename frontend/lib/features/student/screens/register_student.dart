@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/default_voltar_button.dart';
-import '../../utils/colors.dart';
-import '../../widgtes/gradient_background.dart';
-import '../teachers/home_teacher.dart';
+import '../../../utils/default_voltar_button.dart';
+import '../../../utils/colors.dart';
+import '../../../widgtes/gradient_background.dart';
+import '../../teachers/screens/home_teacher.dart';
 
 class RegisterStudent extends StatelessWidget {
   const RegisterStudent({super.key});
