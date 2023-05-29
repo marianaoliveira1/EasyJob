@@ -3,6 +3,7 @@ import 'package:easyjobfrontend/widgtes/card_teacher.dart';
 import 'package:flutter/material.dart';
 
 import 'features/student/screens/home_student.dart';
+import 'features/teachers/screens/profile_teacher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: "EasyJob",
       debugShowCheckedModeBanner: false,
-      home: CardTeacher(),
+      home: ProfileTeacherScreen(),
     );
   }
 }
