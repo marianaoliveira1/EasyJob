@@ -5,9 +5,17 @@ import 'package:flutter/material.dart';
 
 import '../../utils/colors.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final _formKay = GlobalKey<FormState>();
+  final _namecontroller = TextEditingController();
+  final _emailcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,8 +24,11 @@ class LoginScreen extends StatelessWidget {
           DefaultBackgroundGradient(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 270.0),
-            child: Center(
+            child: Form(
+              key: _formKay,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     height: 150,
@@ -36,9 +47,9 @@ class LoginScreen extends StatelessWidget {
                   SizedBox(
                     height: 70,
                   ),
-                  TextField(
+                  TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'email',
+                      hintText: 'Seu email',
                       filled: true,
                       fillColor: Color(0xFF212452),
                       hintStyle: TextStyle(
@@ -49,25 +60,39 @@ class LoginScreen extends StatelessWidget {
                         borderSide: BorderSide.none,
                       ),
                     ),
+                    controller: _emailcontroller,
+                    validator: (email) {
+                      if (email == null || email.isEmpty) {
+                        return "Digite o seu email";
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'senha',
-                      filled: true,
-                      fillColor: Color(0xFF212452),
-                      hintStyle: TextStyle(
-                        color: Colors.white,
+                  TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: 'Sua senha',
+                        filled: true,
+                        fillColor: Color(0xFF212452),
+                        hintStyle: TextStyle(
+                          color: Colors.white,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                          borderSide: BorderSide.none,
+                        ),
                       ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
+                      validator: (senha) {
+                        if (senha == null || senha.isEmpty) {
+                          return "Digite a senha";
+                        } else if (senha.length < 5) {
+                          return "Digite uma senha maior que 5 caracteres";
+                        }
+                        return null;
+                      }),
                   SizedBox(
                     height: 10,
                   ),
@@ -144,10 +169,7 @@ class LoginScreen extends StatelessWidget {
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => LoginScreen()),
-                        // );
+                        if (_formKay.currentState!.validate()) {}
                       },
                       child: Text(
                         'Fazer login',

@@ -5,8 +5,18 @@ import '../../../utils/colors.dart';
 import '../../../widgtes/gradient_background.dart';
 import '../../teachers/screens/home_teacher.dart';
 
-class RegisterStudent extends StatelessWidget {
+class RegisterStudent extends StatefulWidget {
   const RegisterStudent({super.key});
+
+  @override
+  State<RegisterStudent> createState() => _RegisterStudentState();
+}
+
+class _RegisterStudentState extends State<RegisterStudent> {
+  final _formKay = GlobalKey<FormState>();
+  final _namecontroller = TextEditingController();
+  final _emailcontroller = TextEditingController();
+  final _passwordcontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +26,18 @@ class RegisterStudent extends StatelessWidget {
           DefaultBackgroundGradient(),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 270.0),
-            child: Center(
+            child: Form(
+              key: _formKay,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
                     height: 10,
                   ),
                   DefaultVoltarButton(),
                   SizedBox(
-                    height: 150,
+                    height: 20,
                   ),
                   Text(
                     "Que incrível que você quer aprender",
@@ -38,9 +51,9 @@ class RegisterStudent extends StatelessWidget {
                     style: TextStyle(fontSize: 18, color: subtitle),
                   ),
                   SizedBox(
-                    height: 70,
+                    height: 120,
                   ),
-                  TextField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Nome completo',
                       filled: true,
@@ -53,11 +66,18 @@ class RegisterStudent extends StatelessWidget {
                         borderSide: BorderSide.none,
                       ),
                     ),
+                    controller: _namecontroller,
+                    validator: (name) {
+                      if (name == null || name.isEmpty) {
+                        return "Digite o seu nome";
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  TextField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Seu email',
                       filled: true,
@@ -70,25 +90,40 @@ class RegisterStudent extends StatelessWidget {
                         borderSide: BorderSide.none,
                       ),
                     ),
+                    controller: _emailcontroller,
+                    validator: (email) {
+                      if (email == null || email.isEmpty) {
+                        return "Digite o seu email";
+                      }
+                      return null;
+                    },
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Sua senha',
-                      filled: true,
-                      fillColor: Color(0xFF212452),
-                      hintStyle: TextStyle(
-                        color: Colors.white,
+                  TextFormField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: 'Sua senha',
+                        filled: true,
+                        fillColor: Color(0xFF212452),
+                        hintStyle: TextStyle(
+                          color: Colors.white,
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                          borderSide: BorderSide.none,
+                        ),
                       ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16.0),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
+                      controller: _passwordcontroller,
+                      validator: (senha) {
+                        if (senha == null || senha.isEmpty) {
+                          return "Digite a senha";
+                        } else if (senha.length < 5) {
+                          return "Digite uma senha maior que 5 caracteres";
+                        }
+                        return null;
+                      }),
                   SizedBox(
                     height: 170,
                   ),
@@ -97,10 +132,7 @@ class RegisterStudent extends StatelessWidget {
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomeScreenStudent()),
-                        );
+                        if (_formKay.currentState!.validate()) {}
                       },
                       child: Text(
                         'Fazer login',

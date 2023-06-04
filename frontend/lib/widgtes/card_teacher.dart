@@ -1,5 +1,6 @@
 import 'package:easyjobfrontend/widgtes/gradiend_card_backrgound.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 import '../utils/colors.dart';
 
@@ -9,11 +10,23 @@ class CardTeacher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          DefaultBackgroundCardTeacher(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
+      backgroundColor: Colors.black,
+      body: Container(
+        height: 285,
+        width: 478,
+        child: OutlineGradientButton(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xff5E2EC4),
+              Color(0xff4150D7)
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+          strokeWidth: 2,
+          radius: Radius.circular(16),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -26,17 +39,35 @@ class CardTeacher extends StatelessWidget {
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  "Matemática",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: title),
-                  textAlign: TextAlign.start,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Preço por aula/hora ",
+                      style: TextStyle(fontSize: 18, color: title),
+                    ),
+                    Text(
+                      "R\$ 70,00",
+                      style: TextStyle(fontSize: 18, color: title, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 5,
                 ),
-                Text(
-                  "Descrição",
-                  style: TextStyle(fontSize: 14, color: title),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Matéria ",
+                      style: TextStyle(fontSize: 18, color: title),
+                    ),
+                    Text(
+                      "Matemática",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: title),
+                      textAlign: TextAlign.start,
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 10,
@@ -46,33 +77,22 @@ class CardTeacher extends StatelessWidget {
                   style: TextStyle(fontSize: 18, color: title),
                 ),
                 SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Formação",
-                  style: TextStyle(fontSize: 14, color: title),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Sou formado em licenciatura em matemática pela Universidade Federal do Ceará (UFC). Hoje, minha atuação priniciplamente no Ensino Fudamental I.",
-                  style: TextStyle(fontSize: 18, color: title),
-                ),
-                SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Container(
-                  color: Color(0xff141437),
-                  child: Text(
-                    "R\$ 70,00/h",
-                    style: TextStyle(fontSize: 18, color: title),
-                  ),
-                )
+                    width: double.infinity,
+                    height: 45,
+                    color: Color(0xff5E2EC4),
+                    child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Detalhes do professor",
+                          style: TextStyle(color: title, fontSize: 18, fontWeight: FontWeight.w500),
+                        )))
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

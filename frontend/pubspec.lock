@@ -95,6 +95,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  outline_gradient_button:
+    dependency: "direct main"
+    description:
+      name: outline_gradient_button
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1+1"
   path:
     dependency: transitive
     description:
