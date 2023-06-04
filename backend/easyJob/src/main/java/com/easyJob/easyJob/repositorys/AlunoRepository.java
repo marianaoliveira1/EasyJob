@@ -13,4 +13,6 @@ public interface AlunoRepository extends JpaRepository<Alunos,Long> {
     Boolean existsByEmail(String email);
 
     Page<Alunos> findByNome(String alunoNome, Pageable pageable);
+
+    Optional<Alunos> findByEmail(String email);
 }

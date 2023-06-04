@@ -14,6 +14,7 @@ import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,13 +35,6 @@ public class AlunoService {
     }
 
 
-//    public AlunoDtoRequest cadastrarAluno(AlunoDtoRequest alunoDtoRequest) {
-//        alunoDtoRequest.UPPERCASE();
-//        Alunos alunos = modelMapper.map(alunoDtoRequest, Alunos.class);
-//        enderecoService.cadastrarEndereco(alunoDtoRequest.getEnderecos());
-//        alunoRepository.save(alunos);
-//        return modelMapper.map(alunos, AlunoDtoRequest.class);
-//    }
 
     @Transactional
     public AlunoDtoRequest cadastrarAluno(AlunoDtoRequest alunoDtoRequest) {
@@ -49,7 +43,8 @@ public class AlunoService {
         EnderecosDtoRequest enderecoDto = alunoDtoRequest.getEnderecos();
         EnderecosDtoResponse enderecoSalvo = enderecoService.cadastrarEndereco(enderecoDto);
         Alunos alunos = modelMapper.map(alunoDtoRequest, Alunos.class);
-       alunos.setEnderecos(modelMapper.map(enderecoSalvo, Enderecos.class));
+        alunos.setEnderecos(modelMapper.map(enderecoSalvo, Enderecos.class));
+        alunos.setSenha(new  BCryptPasswordEncoder().encode(alunos.getSenha()));
         alunoRepository.save(alunos);
         return modelMapper.map(alunos, AlunoDtoRequest.class);
     }

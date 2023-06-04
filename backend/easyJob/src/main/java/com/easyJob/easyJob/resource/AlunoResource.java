@@ -2,13 +2,16 @@ package com.easyJob.easyJob.resource;
 
 import com.easyJob.easyJob.dto.request.AlunoDtoRequest;
 import com.easyJob.easyJob.dto.request.EnderecosDtoRequest;
+import com.easyJob.easyJob.dto.request.LoginDto;
 import com.easyJob.easyJob.dto.response.AlunoDtoResponse;
 import com.easyJob.easyJob.dto.response.EnderecosDtoResponse;
 import com.easyJob.easyJob.service.AlunoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,6 +21,8 @@ public class AlunoResource {
 
     final AlunoService alunoService;
 
+
+
     public AlunoResource(AlunoService alunoService) {
         this.alunoService = alunoService;
     }
@@ -25,6 +30,11 @@ public class AlunoResource {
     @PostMapping
     public ResponseEntity<AlunoDtoRequest> cadastrarAluno(@RequestBody @Valid AlunoDtoRequest alunoDtoRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(alunoService.cadastrarAluno(alunoDtoRequest));
+    }
+
+    @PostMapping("/loginAluno")
+    public ResponseEntity<Void> loginAluno(@RequestBody @Valid LoginDto loginDto) {
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/{alunoId}")

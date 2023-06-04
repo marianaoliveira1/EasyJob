@@ -5,10 +5,12 @@ import com.easyJob.easyJob.dto.request.EnderecosDtoRequest;
 import com.easyJob.easyJob.dto.request.ProfessorDtoRequest;
 import com.easyJob.easyJob.dto.response.AlunoDtoResponse;
 import com.easyJob.easyJob.dto.response.EnderecosDtoResponse;
+import com.easyJob.easyJob.dto.response.MateriasDtoResponse;
 import com.easyJob.easyJob.exceptions.ConflitoException;
 import com.easyJob.easyJob.exceptions.NotFound;
 import com.easyJob.easyJob.models.Alunos;
 import com.easyJob.easyJob.models.Enderecos;
+import com.easyJob.easyJob.models.Materias;
 import com.easyJob.easyJob.models.Professor;
 import com.easyJob.easyJob.repositorys.ProfessorRepository;
 import org.modelmapper.ModelMapper;
@@ -62,6 +64,14 @@ public class ProfessorService {
     public ProfessorDtoRequest buscarProfessorId(Long professorId) {
         Professor professor = professorRepository.findById(professorId).orElseThrow(()->new NotFound("Professor não encontrado!"));
         return  modelMapper.map(professor, ProfessorDtoRequest.class);
+    }
+
+    public Page<ProfessorDtoRequest> buscarTodosProfessores(Pageable pageable) {
+        Page<Professor> professors = professorRepository.findAll(pageable);
+        List<ProfessorDtoRequest> listaProfessores = professors.stream()
+                .map(m -> modelMapper.map(m,ProfessorDtoRequest.class) )
+                .collect(Collectors.toList());
+        return new PageImpl<>(listaProfessores,pageable,professors.getTotalElements());
     }
 
     public Page<ProfessorDtoRequest> buscarProfessorNome(String professorNome, Pageable pageable) {
