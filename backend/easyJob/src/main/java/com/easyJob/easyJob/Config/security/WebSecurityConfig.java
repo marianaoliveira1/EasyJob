@@ -12,11 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final ALunoLogin aLunoLogin;
-
-    public WebSecurityConfig(ALunoLogin aLunoLogin) {
-        this.aLunoLogin = aLunoLogin;
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -32,12 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(aLunoLogin)
-                .passwordEncoder(passwordEncoder());
 
-    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

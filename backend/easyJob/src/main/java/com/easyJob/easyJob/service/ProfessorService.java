@@ -2,6 +2,7 @@ package com.easyJob.easyJob.service;
 
 import com.easyJob.easyJob.dto.request.AlunoDtoRequest;
 import com.easyJob.easyJob.dto.request.EnderecosDtoRequest;
+import com.easyJob.easyJob.dto.request.LoginDto;
 import com.easyJob.easyJob.dto.request.ProfessorDtoRequest;
 import com.easyJob.easyJob.dto.response.AlunoDtoResponse;
 import com.easyJob.easyJob.dto.response.EnderecosDtoResponse;
@@ -17,6 +18,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +37,15 @@ public class ProfessorService {
         this.modelMapper = modelMapper;
         this.professorRepository = professorRepository;
         this.enderecoService = enderecoService;
+    }
+
+        public UserDetails loginProfessor(LoginDto loginDto) {
+        Professor professor = professorRepository.findByEmail(loginDto.getEmail()).orElseThrow(() -> new NotFound("Usuário não encontrado"));
+        if (!new BCryptPasswordEncoder().matches(loginDto.getSenha(), professor.getSenha())) {
+            throw new ConflitoException("Credenciais inválidas");
+        }
+        // Você pode retornar UserDetails ou qualquer outro objeto necessário para a autenticação
+        return professor;
     }
 
     @Transactional

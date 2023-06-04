@@ -1,11 +1,15 @@
 package com.easyJob.easyJob.models;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "TB05_PROFESSORES")
 @SequenceGenerator(name = "TB05_PROFESSORES_TB05_COD_PROFESSORES_SEQ", sequenceName = "TB05_PROFESSORES_TB05_COD_PROFESSORES_SEQ",allocationSize = 1)
-public class Professor {
+public class Professor implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "TB05_PROFESSORES_TB05_COD_PROFESSORES_SEQ")
     @Column(name = "TB05_COD_PROFESSORES")
@@ -95,5 +99,40 @@ public class Professor {
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.senha;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

@@ -1,6 +1,7 @@
 package com.easyJob.easyJob.resource;
 
 import com.easyJob.easyJob.dto.request.AlunoDtoRequest;
+import com.easyJob.easyJob.dto.request.LoginDto;
 import com.easyJob.easyJob.dto.request.ProfessorDtoRequest;
 import com.easyJob.easyJob.dto.response.AlunoDtoResponse;
 import com.easyJob.easyJob.dto.response.MateriasDtoResponse;
@@ -25,6 +26,13 @@ public class ProfessorResource {
     @PostMapping
     public ResponseEntity<ProfessorDtoRequest> cadastrarProfessor(@RequestBody @Valid  ProfessorDtoRequest professorDtoRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(professorService.cadastrarProfessor(professorDtoRequest));
+    }
+
+    @PostMapping("/loginProfessor")
+    public ResponseEntity<Void> loginProfessor(@RequestBody @Valid LoginDto loginDto) {
+        professorService.loginProfessor(loginDto);
+        // Se as credenciais estiverem corretas, você pode retornar uma resposta de sucesso (200 OK)
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/{professorId}")

@@ -2,6 +2,7 @@ package com.easyJob.easyJob.service;
 
 import com.easyJob.easyJob.dto.request.AlunoDtoRequest;
 import com.easyJob.easyJob.dto.request.EnderecosDtoRequest;
+import com.easyJob.easyJob.dto.request.LoginDto;
 import com.easyJob.easyJob.dto.response.AlunoDtoResponse;
 import com.easyJob.easyJob.dto.response.EnderecosDtoResponse;
 import com.easyJob.easyJob.exceptions.ConflitoException;
@@ -14,6 +15,7 @@ import org.modelmapper.internal.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +34,15 @@ public class AlunoService {
         this.modelMapper = modelMapper;
         this.alunoRepository = alunoRepository;
         this.enderecoService = enderecoService;
+    }
+
+    public UserDetails loginAluno(LoginDto loginDto) {
+        Alunos aluno = alunoRepository.findByEmail(loginDto.getEmail()).orElseThrow(() -> new NotFound("Usuário não encontrado"));
+        if (!new BCryptPasswordEncoder().matches(loginDto.getSenha(), aluno.getSenha())) {
+            throw new ConflitoException("Credenciais inválidas");
+        }
+        // Você pode retornar UserDetails ou qualquer outro objeto necessário para a autenticação
+        return aluno;
     }
 
 

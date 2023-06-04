@@ -34,9 +34,10 @@ public class AlunoResource {
 
     @PostMapping("/loginAluno")
     public ResponseEntity<Void> loginAluno(@RequestBody @Valid LoginDto loginDto) {
+        alunoService.loginAluno(loginDto);
+        // Se as credenciais estiverem corretas, você pode retornar uma resposta de sucesso (200 OK)
         return ResponseEntity.status(HttpStatus.OK).build();
     }
-
     @GetMapping("/{alunoId}")
     public ResponseEntity<AlunoDtoResponse> BuscarAlunoId(@PathVariable("alunoId") Long alunoId) {
         return ResponseEntity.status(HttpStatus.OK).body(alunoService.buscarAlunoId(alunoId));
