@@ -35,6 +35,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   outline_gradient_button: ^2.0.1+1
+  postgres: ^2.5.2
+  flutter_secure_storage: ^8.0.0
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:

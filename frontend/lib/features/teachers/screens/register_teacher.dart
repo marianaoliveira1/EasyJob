@@ -1,5 +1,7 @@
 import 'package:easyjobfrontend/features/student/screens/home_student.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:postgres/postgres.dart';
 
 import '../../../utils/default_voltar_button.dart';
 import '../../../utils/colors.dart';
@@ -26,6 +28,104 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
   final _diascontroller = TextEditingController();
   final _decontroller = TextEditingController();
   final _atecontroller = TextEditingController();
+
+  final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+  late PostgreSQLConnection _connection;
+
+  @override
+  void initState() {
+    super.initState();
+    _connectToDatabase();
+  }
+
+  void _connectToDatabase() async {
+    _connection = PostgreSQLConnection(
+      'your_host',
+      5432,
+      'your_database',
+      username: 'your_username',
+      password: 'your_password',
+    );
+    await _connection.open();
+  }
+
+  void _registerUser() async {
+    if (_formKay.currentState!.validate()) {
+      String name = _namecontroller.text;
+      String email = _emailcontroller.text;
+      String password = _passwordcontroller.text;
+      String whatsapp = _whatsappcontrolle.text;
+      String city = _cidadecontrolle.text;
+      String state = _estadocontrolle.text;
+      String description = _sobrevocecontroller.text;
+      String subjects = _materiascontroller.text;
+      double price = double.parse(_precocontroller.text);
+      String days = _diascontroller.text;
+      String startTime = _decontroller.text;
+      String endTime = _atecontroller.text;
+
+      try {
+        await _connection.query(
+          "INSERT INTO users (name, email, password, whatsapp, city, state, description, subjects, price, days, start_time, end_time) VALUES (@name, @email, @password, @whatsapp, @city, @state, @description, @subjects, @price, @days, @start_time, @end_time)",
+          substitutionValues: {
+            'name': name,
+            'email': email,
+            'password': password,
+            'whatsapp': whatsapp,
+            'city': city,
+            'state': state,
+            'description': description,
+            'subjects': subjects,
+            'price': price,
+            'days': days,
+            'start_time': startTime,
+            'end_time': endTime,
+          },
+        );
+
+        // Limpa os campos após o cadastro
+        // _nameController.clear();
+        // _emailController.clear();
+        // _passwordController.clear();
+        // _whatsappController.clear();
+        // _cityController.clear();
+        // _stateController.clear();
+        // _descriptionController.clear();
+        // _subjectsController.clear();
+        // _priceController.clear();
+        // _daysController.clear();
+        // _startTimeController.clear();
+        // _endTimeController.clear();
+
+        // Exibe uma mensagem de sucesso
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Sucesso'),
+              content: Text('Usuário cadastrado com sucesso!'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } catch (e) {
+        print('Erro durante o cadastro: $e');
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _connection?.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
