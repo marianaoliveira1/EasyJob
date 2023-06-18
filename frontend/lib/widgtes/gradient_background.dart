@@ -13,8 +13,8 @@ class DefaultBackgroundGradient extends StatelessWidget {
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
           colors: [
-            Color(0xFF0E133A),
-            Color(0xFF160B2F)
+            Color.fromARGB(255, 4, 11, 42),
+            Color.fromARGB(255, 0, 45, 107),
           ],
         ),
       ),

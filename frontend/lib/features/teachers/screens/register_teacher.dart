@@ -83,20 +83,6 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
           },
         );
 
-        // Limpa os campos após o cadastro
-        // _nameController.clear();
-        // _emailController.clear();
-        // _passwordController.clear();
-        // _whatsappController.clear();
-        // _cityController.clear();
-        // _stateController.clear();
-        // _descriptionController.clear();
-        // _subjectsController.clear();
-        // _priceController.clear();
-        // _daysController.clear();
-        // _startTimeController.clear();
-        // _endTimeController.clear();
-
         // Exibe uma mensagem de sucesso
         showDialog(
           context: context,
@@ -178,7 +164,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                         decoration: InputDecoration(
                           hintText: 'Nome completo',
                           filled: true,
-                          fillColor: Color(0xFF212452),
+                          fillColor: backgroundInput,
                           hintStyle: TextStyle(
                             color: Colors.white,
                           ),
@@ -202,7 +188,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                         decoration: InputDecoration(
                           hintText: 'Email',
                           filled: true,
-                          fillColor: Color(0xFF212452),
+                          fillColor: backgroundInput,
                           hintStyle: TextStyle(
                             color: Colors.white,
                           ),
@@ -227,7 +213,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           decoration: InputDecoration(
                             hintText: 'Senha',
                             filled: true,
-                            fillColor: Color(0xFF212452),
+                            fillColor: backgroundInput,
                             hintStyle: TextStyle(
                               color: Colors.white,
                             ),
@@ -255,7 +241,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                                 decoration: InputDecoration(
                                   hintText: 'Cidade',
                                   filled: true,
-                                  fillColor: Color(0xFF212452),
+                                  fillColor: backgroundInput,
                                   hintStyle: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -280,7 +266,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                                 decoration: InputDecoration(
                                   hintText: 'Estado',
                                   filled: true,
-                                  fillColor: Color(0xFF212452),
+                                  fillColor: backgroundInput,
                                   hintStyle: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -306,7 +292,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           decoration: InputDecoration(
                             hintText: 'WhatsApp',
                             filled: true,
-                            fillColor: Color(0xFF212452),
+                            fillColor: backgroundInput,
                             hintStyle: TextStyle(
                               color: Colors.white,
                             ),
@@ -332,7 +318,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           decoration: InputDecoration(
                             hintText: 'Sobre você',
                             filled: true,
-                            fillColor: Color(0xFF212452),
+                            fillColor: backgroundInput,
                             hintStyle: TextStyle(
                               color: Colors.white,
                             ),
@@ -367,7 +353,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           decoration: InputDecoration(
                             hintText: 'Materias',
                             filled: true,
-                            fillColor: Color(0xFF212452),
+                            fillColor: backgroundInput,
                             hintStyle: TextStyle(
                               color: Colors.white,
                             ),
@@ -390,7 +376,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           decoration: InputDecoration(
                             hintText: 'Custo da sua hora por aula (R\$)',
                             filled: true,
-                            fillColor: Color(0xFF212452),
+                            fillColor: backgroundInput,
                             hintStyle: TextStyle(
                               color: Colors.white,
                             ),
@@ -428,7 +414,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                                 decoration: InputDecoration(
                                   hintText: 'Dias da semana',
                                   filled: true,
-                                  fillColor: Color(0xFF212452),
+                                  fillColor: backgroundInput,
                                   hintStyle: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -453,7 +439,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                                 decoration: InputDecoration(
                                   hintText: 'De',
                                   filled: true,
-                                  fillColor: Color(0xFF212452),
+                                  fillColor: backgroundInput,
                                   hintStyle: TextStyle(
                                     color: Colors.white,
                                   ),
@@ -478,7 +464,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                                 decoration: InputDecoration(
                                   hintText: 'Até',
                                   filled: true,
-                                  fillColor: Color(0xFF212452),
+                                  fillColor: backgroundInput,
                                   hintStyle: TextStyle(
                                     color: Colors.white,
                                   ),

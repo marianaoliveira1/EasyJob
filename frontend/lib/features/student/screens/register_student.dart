@@ -134,7 +134,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                     decoration: InputDecoration(
                       hintText: 'Nome completo',
                       filled: true,
-                      fillColor: Color(0xFF212452),
+                      fillColor: backgroundInput,
                       hintStyle: TextStyle(
                         color: Colors.white,
                       ),
@@ -158,7 +158,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                     decoration: InputDecoration(
                       hintText: 'Seu email',
                       filled: true,
-                      fillColor: Color(0xFF212452),
+                      fillColor: backgroundInput,
                       hintStyle: TextStyle(
                         color: Colors.white,
                       ),
@@ -183,7 +183,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                       decoration: InputDecoration(
                         hintText: 'Sua senha',
                         filled: true,
-                        fillColor: Color(0xFF212452),
+                        fillColor: backgroundInput,
                         hintStyle: TextStyle(
                           color: Colors.white,
                         ),
@@ -215,7 +215,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                         }
                       },
                       child: Text(
-                        'Fazer login',
+                        'Fazer cadastro',
                         style: TextStyle(fontSize: 22),
                       ),
                       style: ElevatedButton.styleFrom(

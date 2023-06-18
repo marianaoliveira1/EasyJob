@@ -24,14 +24,14 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 Text(
                   "EASYJOB",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 32, color: title),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 42, color: title),
                 ),
                 SizedBox(
                   height: 50,
                 ),
                 Text(
                   "A plataforma que pode ajudar você a encontrar o \nprofessor mais perto do seu filho(a)",
-                  style: TextStyle(fontSize: 24, color: title),
+                  style: TextStyle(fontSize: 30, color: title),
                 ),
                 SizedBox(
                   height: 150,

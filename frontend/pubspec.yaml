@@ -38,6 +38,7 @@ dependencies:
   postgres: ^2.5.2
   flutter_secure_storage: ^8.0.0
   get: ^4.6.5
+  http: ^0.13.4
 
 dev_dependencies:
   flutter_test:
@@ -62,8 +63,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/images/
+  assets:
+    - assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

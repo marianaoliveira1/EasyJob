@@ -1,5 +1,6 @@
 import 'package:easyjobfrontend/features/student/screens/register_student.dart';
 import 'package:easyjobfrontend/features/teachers/screens/register_teacher.dart';
+import 'package:easyjobfrontend/screens/login/server/usuario_server.dart';
 import 'package:easyjobfrontend/widgtes/gradient_background.dart';
 import 'package:flutter/material.dart';
 
@@ -14,8 +15,27 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKay = GlobalKey<FormState>();
-  final _namecontroller = TextEditingController();
+  final _senhacontroller = TextEditingController();
   final _emailcontroller = TextEditingController();
+
+  final UsuarioService _usuarioService = UsuarioService();
+
+  void _fazerLogin() async {
+    final nomeUsuario = _emailcontroller.text;
+    final senha = _senhacontroller.text;
+
+    try {
+      final token = await _usuarioService.fazerLogin(nomeUsuario, senha);
+      if (token != null) {
+        // Login bem-sucedido, faça algo (por exemplo, navegue para a próxima tela)
+      } else {
+        // Login falhou, exiba uma mensagem de erro
+      }
+    } catch (e) {
+      // Erro de conexão ou autenticação, exiba uma mensagem de erro
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       hintText: 'Seu email',
                       filled: true,
-                      fillColor: Color(0xFF212452),
+                      fillColor: backgroundInput,
                       hintStyle: TextStyle(
                         color: Colors.white,
                       ),
@@ -76,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: InputDecoration(
                         hintText: 'Sua senha',
                         filled: true,
-                        fillColor: Color(0xFF212452),
+                        fillColor: backgroundInput,
                         hintStyle: TextStyle(
                           color: Colors.white,
                         ),
@@ -85,6 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderSide: BorderSide.none,
                         ),
                       ),
+                      controller: _senhacontroller,
                       validator: (senha) {
                         if (senha == null || senha.isEmpty) {
                           return "Digite a senha";
@@ -169,7 +190,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 48,
                     child: ElevatedButton(
                       onPressed: () {
-                        if (_formKay.currentState!.validate()) {}
+                        if (_formKay.currentState!.validate()) {
+                          _fazerLogin();
+                        }
                       },
                       child: Text(
                         'Fazer login',
