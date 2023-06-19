@@ -1,8 +1,11 @@
+import 'package:easyjobfrontend/controller/controller.dart';
 import 'package:easyjobfrontend/features/student/screens/register_student.dart';
 import 'package:easyjobfrontend/features/teachers/screens/register_teacher.dart';
 import 'package:easyjobfrontend/screens/login/server/usuario_server.dart';
 import 'package:easyjobfrontend/widgtes/gradient_background.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 
 import '../../utils/colors.dart';
 
@@ -17,6 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final _formKay = GlobalKey<FormState>();
   final _senhacontroller = TextEditingController();
   final _emailcontroller = TextEditingController();
+
+  var c_login = Get.find<ControllerAutenticacao>();
 
   final UsuarioService _usuarioService = UsuarioService();
 
