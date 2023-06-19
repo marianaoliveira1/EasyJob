@@ -22,7 +22,7 @@ class DefaultVoltarButton extends StatelessWidget {
         children: [
           const Icon(
             Icons.navigate_before,
-            color: Colors.white,
+            color: Color.fromARGB(255, 0, 45, 107),
           ),
           Text(
             "Voltar",

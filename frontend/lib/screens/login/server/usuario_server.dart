@@ -18,11 +18,16 @@ class UsuarioService {
       final respostaJson = json.decode(response.body);
       final token = respostaJson['token'];
 
-      Get.find<ControllerAutenticacao>().usuario.value = EntityUsuario(
-        nome: respostaJson['nome'],
-        senha: respostaJson['senha'],
-        email: respostaJson['email'],
-      );
+      Get.find<ControllerAutenticacao>().usuario.value = EntityUsuario.fromMap(respostaJson);
+
+      switch (respostaJson['tipoUsuarioDescricao']) {
+        case "ALUNO":
+          Get.offAndToNamed('/homepai');
+          break;
+        case "PROFESSOR":
+          Get.offAndToNamed('/perfildoprofessor');
+          break;
+      }
       return token;
     } else {
       throw Exception('Erro de autenticação: ${response.body}');

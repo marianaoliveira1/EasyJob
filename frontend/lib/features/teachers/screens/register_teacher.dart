@@ -1,6 +1,8 @@
 import 'package:easyjobfrontend/features/student/screens/home_student.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:postgres/postgres.dart';
 
 import '../../../utils/default_voltar_button.dart';
@@ -132,7 +134,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                       ),
                       DefaultVoltarButton(),
                       SizedBox(
-                        height: 90,
+                        height: 20,
                       ),
                       Text(
                         "Que incrível que você quer dar aulas",
@@ -164,13 +166,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                         decoration: InputDecoration(
                           hintText: 'Nome completo',
                           filled: true,
-                          fillColor: backgroundInput,
-                          hintStyle: TextStyle(
-                            color: Colors.white,
-                          ),
+                          fillColor: Colors.transparent,
+                          hintStyle: TextStyle(color: Colors.black),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16.0),
-                            borderSide: BorderSide.none,
+                            borderSide: BorderSide(
+                              color: backgroundModal,
+                              width: 1.0, // Defina a espessura da borda conforme necessário
+                            ),
                           ),
                         ),
                         controller: _namecontroller,
@@ -188,13 +191,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                         decoration: InputDecoration(
                           hintText: 'Email',
                           filled: true,
-                          fillColor: backgroundInput,
-                          hintStyle: TextStyle(
-                            color: Colors.white,
-                          ),
+                          fillColor: Colors.transparent,
+                          hintStyle: TextStyle(color: Colors.black),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16.0),
-                            borderSide: BorderSide.none,
+                            borderSide: BorderSide(
+                              color: backgroundModal,
+                              width: 1.0, // Defina a espessura da borda conforme necessário
+                            ),
                           ),
                         ),
                         controller: _emailcontroller,
@@ -213,13 +217,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           decoration: InputDecoration(
                             hintText: 'Senha',
                             filled: true,
-                            fillColor: backgroundInput,
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
+                            fillColor: Colors.transparent,
+                            hintStyle: TextStyle(color: Colors.black),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16.0),
-                              borderSide: BorderSide.none,
+                              borderSide: BorderSide(
+                                color: backgroundModal,
+                                width: 1.0, // Defina a espessura da borda conforme necessário
+                              ),
                             ),
                           ),
                           controller: _passwordcontroller,
@@ -241,13 +246,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                                 decoration: InputDecoration(
                                   hintText: 'Cidade',
                                   filled: true,
-                                  fillColor: backgroundInput,
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  ),
+                                  fillColor: Colors.transparent,
+                                  hintStyle: TextStyle(color: Colors.black),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16.0),
-                                    borderSide: BorderSide.none,
+                                    borderSide: BorderSide(
+                                      color: backgroundModal,
+                                      width: 1.0, // Defina a espessura da borda conforme necessário
+                                    ),
                                   ),
                                 ),
                                 controller: _cidadecontrolle,
@@ -266,13 +272,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                                 decoration: InputDecoration(
                                   hintText: 'Estado',
                                   filled: true,
-                                  fillColor: backgroundInput,
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  ),
+                                  fillColor: Colors.transparent,
+                                  hintStyle: TextStyle(color: Colors.black),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16.0),
-                                    borderSide: BorderSide.none,
+                                    borderSide: BorderSide(
+                                      color: backgroundModal,
+                                      width: 1.0, // Defina a espessura da borda conforme necessário
+                                    ),
                                   ),
                                 ),
                                 controller: _estadocontrolle,
@@ -292,13 +299,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           decoration: InputDecoration(
                             hintText: 'WhatsApp',
                             filled: true,
-                            fillColor: backgroundInput,
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
+                            fillColor: Colors.transparent,
+                            hintStyle: TextStyle(color: Colors.black),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16.0),
-                              borderSide: BorderSide.none,
+                              borderSide: BorderSide(
+                                color: backgroundModal,
+                                width: 1.0, // Defina a espessura da borda conforme necessário
+                              ),
                             ),
                           ),
                           controller: _whatsappcontrolle,
@@ -318,13 +326,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           decoration: InputDecoration(
                             hintText: 'Sobre você',
                             filled: true,
-                            fillColor: backgroundInput,
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
+                            fillColor: Colors.transparent,
+                            hintStyle: TextStyle(color: Colors.black),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16.0),
-                              borderSide: BorderSide.none,
+                              borderSide: BorderSide(
+                                color: backgroundModal,
+                                width: 1.0, // Defina a espessura da borda conforme necessário
+                              ),
                             ),
                           ),
                           controller: _sobrevocecontroller,
@@ -353,13 +362,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           decoration: InputDecoration(
                             hintText: 'Materias',
                             filled: true,
-                            fillColor: backgroundInput,
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
+                            fillColor: Colors.transparent,
+                            hintStyle: TextStyle(color: Colors.black),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16.0),
-                              borderSide: BorderSide.none,
+                              borderSide: BorderSide(
+                                color: backgroundModal,
+                                width: 1.0, // Defina a espessura da borda conforme necessário
+                              ),
                             ),
                           ),
                           controller: _materiascontroller,
@@ -376,13 +386,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           decoration: InputDecoration(
                             hintText: 'Custo da sua hora por aula (R\$)',
                             filled: true,
-                            fillColor: backgroundInput,
-                            hintStyle: TextStyle(
-                              color: Colors.white,
-                            ),
+                            fillColor: Colors.transparent,
+                            hintStyle: TextStyle(color: Colors.black),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(16.0),
-                              borderSide: BorderSide.none,
+                              borderSide: BorderSide(
+                                color: backgroundModal,
+                                width: 1.0, // Defina a espessura da borda conforme necessário
+                              ),
                             ),
                           ),
                           controller: _precocontroller,
@@ -414,13 +425,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                                 decoration: InputDecoration(
                                   hintText: 'Dias da semana',
                                   filled: true,
-                                  fillColor: backgroundInput,
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  ),
+                                  fillColor: Colors.transparent,
+                                  hintStyle: TextStyle(color: Colors.black),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16.0),
-                                    borderSide: BorderSide.none,
+                                    borderSide: BorderSide(
+                                      color: backgroundModal,
+                                      width: 1.0, // Defina a espessura da borda conforme necessário
+                                    ),
                                   ),
                                 ),
                                 controller: _diascontroller,
@@ -439,13 +451,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                                 decoration: InputDecoration(
                                   hintText: 'De',
                                   filled: true,
-                                  fillColor: backgroundInput,
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  ),
+                                  fillColor: Colors.transparent,
+                                  hintStyle: TextStyle(color: Colors.black),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16.0),
-                                    borderSide: BorderSide.none,
+                                    borderSide: BorderSide(
+                                      color: backgroundModal,
+                                      width: 1.0, // Defina a espessura da borda conforme necessário
+                                    ),
                                   ),
                                 ),
                                 controller: _decontroller,
@@ -464,13 +477,14 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                                 decoration: InputDecoration(
                                   hintText: 'Até',
                                   filled: true,
-                                  fillColor: backgroundInput,
-                                  hintStyle: TextStyle(
-                                    color: Colors.white,
-                                  ),
+                                  fillColor: Colors.transparent,
+                                  hintStyle: TextStyle(color: Colors.black),
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(16.0),
-                                    borderSide: BorderSide.none,
+                                    borderSide: BorderSide(
+                                      color: backgroundModal,
+                                      width: 1.0, // Defina a espessura da borda conforme necessário
+                                    ),
                                   ),
                                 ),
                                 controller: _atecontroller,
@@ -494,7 +508,10 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                         height: 48,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (_formKay.currentState!.validate()) {}
+                            if (_formKay.currentState!.validate()) {
+                              _registerUser();
+                              Get.toNamed('/perfildoprofessor');
+                            }
                           },
                           child: Text(
                             'Cadastrar',

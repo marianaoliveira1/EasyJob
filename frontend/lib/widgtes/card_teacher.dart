@@ -1,14 +1,26 @@
-import 'package:easyjobfrontend/widgtes/gradiend_card_backrgound.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 import '../utils/colors.dart';
+import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class CardTeacher extends StatelessWidget {
   const CardTeacher({super.key});
 
   @override
   Widget build(BuildContext context) {
+    const String baseUrl = 'http://localhost:8080/swagger-ui.html#';
+
+    Future<String?> dados(String nome, String materia, String descricao) async {
+      final url = Uri.parse('$baseUrl/login');
+      final response = await http.post(url, body: {
+        'nome': nome,
+        'materia': materia,
+        'descricao': descricao,
+      });
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
@@ -32,7 +44,7 @@ class CardTeacher extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Mariana Oliveira Fernandes",
+                  "",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: title),
                   textAlign: TextAlign.start,
                 ),

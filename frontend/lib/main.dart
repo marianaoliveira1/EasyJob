@@ -1,13 +1,13 @@
 import 'package:easyjobfrontend/controller/controller.dart';
 import 'package:easyjobfrontend/features/student/screens/register_student.dart';
-import 'package:easyjobfrontend/features/teachers/screens/home_teacher.dart';
 import 'package:easyjobfrontend/features/teachers/screens/profile_teacher.dart';
 import 'package:easyjobfrontend/features/teachers/screens/register_teacher.dart';
 import 'package:easyjobfrontend/screens/login/login_screen.dart';
 import 'package:easyjobfrontend/screens/welcome/welcome_screen.dart';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'features/student/screens/home_student.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ControllerAutneticacao());
+    Get.put(ControllerAutenticacao());
 
     return GetMaterialApp(
       title: "EasyJob",

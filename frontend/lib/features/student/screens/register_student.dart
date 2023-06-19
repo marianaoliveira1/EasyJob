@@ -134,13 +134,14 @@ class _RegisterStudentState extends State<RegisterStudent> {
                     decoration: InputDecoration(
                       hintText: 'Nome completo',
                       filled: true,
-                      fillColor: backgroundInput,
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
+                      fillColor: Colors.transparent,
+                      hintStyle: TextStyle(color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16.0),
-                        borderSide: BorderSide.none,
+                        borderSide: BorderSide(
+                          color: backgroundModal,
+                          width: 1.0, // Defina a espessura da borda conforme necessário
+                        ),
                       ),
                     ),
                     controller: _namecontroller,
@@ -158,13 +159,14 @@ class _RegisterStudentState extends State<RegisterStudent> {
                     decoration: InputDecoration(
                       hintText: 'Seu email',
                       filled: true,
-                      fillColor: backgroundInput,
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
+                      fillColor: Colors.transparent,
+                      hintStyle: TextStyle(color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16.0),
-                        borderSide: BorderSide.none,
+                        borderSide: BorderSide(
+                          color: backgroundModal,
+                          width: 1.0, // Defina a espessura da borda conforme necessário
+                        ),
                       ),
                     ),
                     controller: _emailcontroller,
@@ -183,13 +185,14 @@ class _RegisterStudentState extends State<RegisterStudent> {
                       decoration: InputDecoration(
                         hintText: 'Sua senha',
                         filled: true,
-                        fillColor: backgroundInput,
-                        hintStyle: TextStyle(
-                          color: Colors.white,
-                        ),
+                        fillColor: Colors.transparent,
+                        hintStyle: TextStyle(color: Colors.black),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16.0),
-                          borderSide: BorderSide.none,
+                          borderSide: BorderSide(
+                            color: backgroundModal,
+                            width: 1.0, // Defina a espessura da borda conforme necessário
+                          ),
                         ),
                       ),
                       controller: _passwordcontroller,
@@ -202,7 +205,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                         return null;
                       }),
                   SizedBox(
-                    height: 170,
+                    height: 100,
                   ),
                   SizedBox(
                     width: 270,

@@ -76,13 +76,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       hintText: 'Seu email',
                       filled: true,
-                      fillColor: backgroundInput,
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
+                      fillColor: Colors.transparent,
+                      hintStyle: TextStyle(color: Colors.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16.0),
-                        borderSide: BorderSide.none,
+                        borderSide: BorderSide(
+                          color: backgroundModal,
+                          width: 1.0, // Defina a espessura da borda conforme necessário
+                        ),
                       ),
                     ),
                     controller: _emailcontroller,
@@ -100,22 +101,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       obscureText: true,
                       decoration: InputDecoration(
                         hintText: 'Sua senha',
-                        filled: true,
-                        fillColor: backgroundInput,
-                        hintStyle: TextStyle(
-                          color: Colors.white,
-                        ),
+                        fillColor: Colors.transparent,
+                        hintStyle: TextStyle(color: Colors.black),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16.0),
-                          borderSide: BorderSide.none,
+                          borderSide: BorderSide(
+                            color: backgroundModal,
+                            width: 1.0, // Defina a espessura da borda conforme necessário
+                          ),
                         ),
                       ),
                       controller: _senhacontroller,
                       validator: (senha) {
                         if (senha == null || senha.isEmpty) {
                           return "Digite a senha";
-                        } else if (senha.length < 5) {
-                          return "Digite uma senha maior que 5 caracteres";
                         }
                         return null;
                       }),
@@ -139,41 +138,37 @@ class _LoginScreenState extends State<LoginScreen> {
                                 children: [
                                   Text(
                                     "Você é um:",
-                                    style: TextStyle(color: title),
+                                    style: TextStyle(color: Colors.white),
                                   ),
                                   SizedBox(
                                     height: 15,
                                   ),
-                                  Row(
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => RegisterTeacher()),
-                                          );
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: backgroundButton,
-                                          onPrimary: Colors.white,
-                                        ),
-                                        child: Text('Professor'),
-                                      ),
-                                      SizedBox(width: 16),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(builder: (context) => RegisterStudent()),
-                                          );
-                                        },
-                                        style: ElevatedButton.styleFrom(
-                                          primary: backgroundButton,
-                                          onPrimary: Colors.white,
-                                        ),
-                                        child: Text('Pais e responsáveis'),
-                                      ),
-                                    ],
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => RegisterTeacher()),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: backgroundButton,
+                                      onPrimary: Colors.white,
+                                    ),
+                                    child: Text('Professor'),
+                                  ),
+                                  SizedBox(height: 20),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(builder: (context) => RegisterStudent()),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      primary: backgroundButton,
+                                      onPrimary: Colors.white,
+                                    ),
+                                    child: Text('Pais e responsáveis'),
                                   ),
                                 ],
                               ),

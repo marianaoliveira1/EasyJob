@@ -13,91 +13,83 @@ class ProfileTeacherScreen extends StatelessWidget {
         children: [
           DefaultBackgroundGradient(),
           Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        color: Color(0xff212452),
-                        child: Text(
-                          "Matemática",
-                          style: TextStyle(fontSize: 18, color: title),
-                        ),
-                      ),
-                      Text(
-                        "Descrição",
-                        style: TextStyle(fontSize: 14, color: title),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Professora de matemática com 15 anos de experiência, \ntanto em escola públicas quanto privadas",
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      color: Color(0xff212452),
+                      child: Text(
+                        "Matemática",
                         style: TextStyle(fontSize: 18, color: title),
                       ),
-                      SizedBox(
-                        height: 10,
+                    ),
+                    Text(
+                      "Descrição",
+                      style: TextStyle(fontSize: 14, color: title),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Professora de matemática com 15 anos de experiência, \ntanto em escola públicas quanto privadas",
+                      style: TextStyle(fontSize: 18, color: title),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      child: Column(
+                        children: [
+                          Text(
+                            "Mariana Oliveira Fernandes",
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: title),
+                            textAlign: TextAlign.start,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Preço por hora",
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: title),
+                            textAlign: TextAlign.start,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "R\$70,00",
+                            style: TextStyle(fontSize: 20, color: title),
+                            textAlign: TextAlign.start,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            color: Color(0xff04D361),
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Entrar em contato",
+                                style: TextStyle(fontSize: 18, color: title),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-                      Text(
-                        "Formação",
-                        style: TextStyle(fontSize: 14, color: title),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Sou formado em licenciatura em matemática pela Universidade Federal do \nCeará (UFC). Hoje, minha atuação priniciplamente no Ensino Fudamental I.",
-                        style: TextStyle(fontSize: 18, color: title),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Container(
-                        child: Column(
-                          children: [
-                            Text(
-                              "Mariana Oliveira Fernandes",
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: title),
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "Preço por hora",
-                              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: title),
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              "R\$70,00",
-                              style: TextStyle(fontSize: 20, color: title),
-                              textAlign: TextAlign.start,
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                                color: Color(0xff04D361),
-                                child: TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Entrar em contato",
-                                      style: TextStyle(fontSize: 18, color: title),
-                                    )))
-                          ],
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ))
+                    )
+                  ],
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
