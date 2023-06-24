@@ -3,13 +3,17 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:postgres/postgres.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../utils/default_voltar_button.dart';
 import '../../../utils/colors.dart';
 import '../../../widgtes/gradient_background.dart';
 
+final supabase = Supabase.instance.client;
+
 class RegisterStudent extends StatefulWidget {
-  const RegisterStudent({super.key});
+  const RegisterStudent({super.key, required this.tipo});
+  final int tipo;
 
   @override
   State<RegisterStudent> createState() => _RegisterStudentState();
@@ -17,76 +21,31 @@ class RegisterStudent extends StatefulWidget {
 
 class _RegisterStudentState extends State<RegisterStudent> {
   final _formKay = GlobalKey<FormState>();
-  final TextEditingController _namecontroller = TextEditingController();
-  final TextEditingController _emailcontroller = TextEditingController();
-  final TextEditingController _passwordcontroller = TextEditingController();
 
-  final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
+  final TextEditingController _nomecontroller = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   late PostgreSQLConnection _connection;
+  Future<void> _registro(BuildContext context) async {
+    // !
+    final name = _nomecontroller.text;
+    final tipo = widget.tipo;
+    final email = _emailController.text;
+    final password = _passwordController.text;
 
-  @override
-  void initState() {
-    super.initState();
-    _connectToDatabase();
-  }
-
-  void _connectToDatabase() async {
-    _connection = PostgreSQLConnection(
-      'your_host',
-      5432,
-      'your_database',
-      username: 'your_username',
-      password: 'your_password',
-    );
-    await _connection.open();
-  }
-
-  void _registerUser() async {
-    if (_formKay.currentState!.validate()) {
-      String name = _namecontroller.text;
-      String email = _emailcontroller.text;
-      String password = _passwordcontroller.text;
-
-      try {
-        await _connection.query(
-          "INSERT INTO users (name, email, password) VALUES (@name, @email, @password)",
-          substitutionValues: {
-            'name': name,
-            'email': email,
-            'password': password,
-          },
-        );
-
-        // Armazena o email com segurança no Flutter Secure Storage
-        await _secureStorage.write(key: 'email', value: email);
-
-        // Limpa os campos após o cadastro
-        _namecontroller.clear();
-        _emailcontroller.clear();
-        _passwordcontroller.clear();
-
-        // Exibe uma mensagem de sucesso
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Sucesso'),
-              content: Text('Usuário cadastrado com sucesso!'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      } catch (e) {
-        print('Erro durante o cadastro: $e');
+    // *
+    await Supabase.instance.client.from('usuario').insert([
+      {
+        'nome': name,
+        'email': email,
+        'tipo': tipo,
       }
-    }
+    ]);
+    await Supabase.instance.client.auth.signUp(
+      password: password,
+      email: email,
+    );
   }
 
   @override
@@ -117,15 +76,8 @@ class _RegisterStudentState extends State<RegisterStudent> {
                     height: 20,
                   ),
                   Text(
-                    "Que incrível que você quer aprender",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26, color: title),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
                     "O primeiro passo, é preencher esse formulário de inscrição.",
-                    style: TextStyle(fontSize: 18, color: subtitle),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26, color: title),
                   ),
                   SizedBox(
                     height: 120,
@@ -144,7 +96,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                         ),
                       ),
                     ),
-                    controller: _namecontroller,
+                    controller: _nomecontroller,
                     validator: (name) {
                       if (name == null || name.isEmpty) {
                         return "Digite o seu nome";
@@ -169,7 +121,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                         ),
                       ),
                     ),
-                    controller: _emailcontroller,
+                    controller: _emailController,
                     validator: (email) {
                       if (email == null || email.isEmpty) {
                         return "Digite o seu email";
@@ -195,7 +147,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                           ),
                         ),
                       ),
-                      controller: _passwordcontroller,
+                      controller: _passwordController,
                       validator: (senha) {
                         if (senha == null || senha.isEmpty) {
                           return "Digite a senha";
@@ -213,8 +165,7 @@ class _RegisterStudentState extends State<RegisterStudent> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKay.currentState!.validate()) {
-                          _registerUser();
-                          Get.toNamed('/homepai');
+                          _registro(context);
                         }
                       },
                       child: Text(

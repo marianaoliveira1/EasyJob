@@ -1,3 +1,7 @@
+import 'dart:async';
+
+import 'package:supabase_flutter/supabase_flutter.dart';
+
 import 'package:easyjobfrontend/controller/controller.dart';
 import 'package:easyjobfrontend/features/student/screens/register_student.dart';
 import 'package:easyjobfrontend/features/teachers/screens/register_teacher.dart';
@@ -6,8 +10,11 @@ import 'package:easyjobfrontend/widgtes/gradient_background.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../utils/colors.dart';
+
+final supabase = Supabase.instance.client;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,27 +25,14 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKay = GlobalKey<FormState>();
-  final _senhacontroller = TextEditingController();
-  final _emailcontroller = TextEditingController();
 
-  var c_login = Get.find<ControllerAutenticacao>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  final UsuarioService _usuarioService = UsuarioService();
-
-  void _fazerLogin() async {
-    final nomeUsuario = _emailcontroller.text;
-    final senha = _senhacontroller.text;
-
-    try {
-      final token = await _usuarioService.fazerLogin(nomeUsuario, senha);
-      if (token != null) {
-        // Login bem-sucedido, faça algo (por exemplo, navegue para a próxima tela)
-      } else {
-        // Login falhou, exiba uma mensagem de erro
-      }
-    } catch (e) {
-      // Erro de conexão ou autenticação, exiba uma mensagem de erro
-    }
+  Future<void> _login(BuildContext context) async {
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    await Supabase.instance.client.auth.signInWithPassword(password: password, email: email);
   }
 
   @override
@@ -86,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    controller: _emailcontroller,
+                    controller: _emailController,
                     validator: (email) {
                       if (email == null || email.isEmpty) {
                         return "Digite o seu email";
@@ -111,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                       ),
-                      controller: _senhacontroller,
+                      controller: _passwordController,
                       validator: (senha) {
                         if (senha == null || senha.isEmpty) {
                           return "Digite a senha";
@@ -126,61 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       "Não tem uma conta?",
                       style: TextStyle(color: title),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              backgroundColor: backgroundModal,
-                              content: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    "Você é um:",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  SizedBox(
-                                    height: 15,
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => RegisterTeacher()),
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: backgroundButton,
-                                      onPrimary: Colors.white,
-                                    ),
-                                    child: Text('Professor'),
-                                  ),
-                                  SizedBox(height: 20),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(builder: (context) => RegisterStudent()),
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      primary: backgroundButton,
-                                      onPrimary: Colors.white,
-                                    ),
-                                    child: Text('Pais e responsáveis'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        );
-                      },
-                      child: Text(
-                        "Cadastre-se",
-                        style: TextStyle(color: title, fontWeight: FontWeight.bold),
-                      ),
-                    )
+                    RegistrationOption()
                   ]),
                   SizedBox(
                     height: 200,
@@ -191,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKay.currentState!.validate()) {
-                          _fazerLogin();
+                          _login(context);
                         }
                       },
                       child: Text(
@@ -208,6 +148,77 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class RegistrationOption extends StatelessWidget {
+  const RegistrationOption({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: backgroundModal,
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Você é um:",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterStudent(
+                                  tipo: 0,
+                                )),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: backgroundButton,
+                      onPrimary: Colors.white,
+                    ),
+                    child: Text('Professor'),
+                  ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterStudent(
+                                  tipo: 1,
+                                )),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: backgroundButton,
+                      onPrimary: Colors.white,
+                    ),
+                    child: Text('Pais e responsáveis'),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+      child: Text(
+        "Cadastre-se",
+        style: TextStyle(color: title, fontWeight: FontWeight.bold),
       ),
     );
   }

@@ -39,6 +39,7 @@ dependencies:
   flutter_secure_storage: ^8.0.0
   get: ^4.6.5
   http: ^0.13.4
+  supabase_flutter: ^1.10.4
 
 dev_dependencies:
   flutter_test:

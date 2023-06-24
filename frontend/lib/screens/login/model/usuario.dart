@@ -1,64 +1,40 @@
 import 'dart:convert';
 
 class EntityUsuario {
+  final int tipo;
   final String? nome;
-  final String? senha;
   final String? email;
-  final String? tipo;
-  final EntityUsuarioEndereco endereco;
-  final EntityMateriasDtorequest materias;
-  final String? telefone;
   EntityUsuario({
+    required this.tipo,
     this.nome,
-    this.senha,
     this.email,
-    this.tipo,
-    required this.endereco,
-    required this.materias,
-    this.telefone,
   });
 
   EntityUsuario copyWith({
+    int? tipo,
     String? nome,
-    String? senha,
     String? email,
-    String? tipo,
-    EntityUsuarioEndereco? endereco,
-    EntityMateriasDtorequest? materias,
-    String? telefone,
   }) {
     return EntityUsuario(
-      nome: nome ?? this.nome,
-      senha: senha ?? this.senha,
-      email: email ?? this.email,
       tipo: tipo ?? this.tipo,
-      endereco: endereco ?? this.endereco,
-      materias: materias ?? this.materias,
-      telefone: telefone ?? this.telefone,
+      nome: nome ?? this.nome,
+      email: email ?? this.email,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      "nome": nome,
-      "senha": senha,
-      "email": email,
       "tipo": tipo,
-      "endereco": endereco.toMap(),
-      "materias": materias.toMap(),
-      "telefone": telefone,
+      "nome": nome,
+      "email": email,
     };
   }
 
   factory EntityUsuario.fromMap(Map<String, dynamic> map) {
     return EntityUsuario(
+      tipo: map["tipo"]?.toInt(),
       nome: map["nome"],
-      senha: map["senha"],
       email: map["email"],
-      tipo: map["tipo"],
-      endereco: EntityUsuarioEndereco.fromMap(map["endereco"]),
-      materias: EntityMateriasDtorequest.fromMap(map["materias"]),
-      telefone: map["telefone"],
     );
   }
 
@@ -67,21 +43,14 @@ class EntityUsuario {
   factory EntityUsuario.fromJson(String source) => EntityUsuario.fromMap(json.decode(source));
 
   @override
-  String toString() {
-    return "EntityUsuario(nome: $nome, senha: $senha, email: $email, tipo: $tipo, endereco: $endereco, materias: $materias, telefone: $telefone)";
-  }
-
-  @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is EntityUsuario && other.nome == nome && other.senha == senha && other.email == email && other.tipo == tipo && other.endereco == endereco && other.materias == materias && other.telefone == telefone;
+    return other is EntityUsuario && other.tipo == tipo && other.nome == nome && other.email == email;
   }
 
   @override
-  int get hashCode {
-    return nome.hashCode ^ senha.hashCode ^ email.hashCode ^ tipo.hashCode ^ endereco.hashCode ^ materias.hashCode ^ telefone.hashCode;
-  }
+  int get hashCode => tipo.hashCode ^ nome.hashCode ^ email.hashCode;
 }
 
 class EntityUsuarioEndereco {
