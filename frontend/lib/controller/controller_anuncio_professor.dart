@@ -6,6 +6,7 @@ import '../screens/login/login_screen.dart';
 
 class ControllerAnuncioProfessor extends GetxController {
   final RxList<EntityProfessorAnuncio> professor_anuncio = RxList<EntityProfessorAnuncio>();
+  // final RxString filter = RxString();
 
   @override
   void onInit() {
@@ -14,7 +15,7 @@ class ControllerAnuncioProfessor extends GetxController {
     ]).listen((event) {
       List<EntityProfessorAnuncio> newProfessores = [];
       for (var row in event) {
-        newProfessores.add(EntityProfessorAnuncio.fromMap(row));
+        newProfessores.add(EntityProfessorAnuncio.fromMap(row as Map<String, dynamic>));
       }
       professor_anuncio.value = newProfessores;
     });

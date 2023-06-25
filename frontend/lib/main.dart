@@ -18,7 +18,6 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     Get.put(ControllerAutenticacao());
@@ -53,11 +52,11 @@ class MyApp extends StatelessWidget {
           page: () => RegisterTeacher(),
           transition: Transition.downToUp,
         ),
-        GetPage(
-          name: '/perfildoprofessor',
-          page: () => ProfileTeacherScreen(),
-          transition: Transition.downToUp,
-        ),
+        // GetPage(
+        //   name: '/perfildoprofessor',
+        //   page: () => ProfileTeacherScreen(),
+        //   transition: Transition.downToUp,
+        // ),
       ],
     );
   }

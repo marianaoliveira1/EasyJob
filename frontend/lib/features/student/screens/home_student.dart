@@ -23,37 +23,49 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
           DefaultBackgroundGradient(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-            child: Row(
+            child: Column(
               children: [
-                Text(
-                  "EASYJOB",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: title),
+                Row(
+                  children: [
+                    Text(
+                      "EASYJOB",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: title),
+                    ),
+                    SizedBox(
+                      width: 18,
+                    ),
+                    Expanded(
+                      child: TextField(
+                        style: TextStyle(color: Colors.white),
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.search, color: Colors.white),
+                          labelText: 'Pesquise por um um professor',
+                          labelStyle: TextStyle(color: Colors.white),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  width: 18,
+                  height: 40,
                 ),
                 Expanded(
-                  child: TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search, color: Colors.white),
-                      labelText: 'Pesquise por um um professor',
-                      labelStyle: TextStyle(color: Colors.white),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
+                  child: Obx(() {
+                    return GridView.count(
+                      crossAxisCount: 3,
+                      children: [
+                        for (var prof in cProfessores.professor_anuncio)
+                          CardTeacher(
+                            profanuncio: prof,
+                          )
+                      ],
+                    );
+                  }),
+                )
               ],
             ),
           ),
-          Obx(() {
-            return GridView.count(
-              crossAxisCount: 3,
-              children: [
-                for (var prof in cProfessores.professor_anuncio) Text(prof.nome ?? ''),
-              ],
-            );
-          }),
         ],
       ),
     );

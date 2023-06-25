@@ -180,19 +180,19 @@ class EntityMateriasDtorequest {
 }
 
 class EntityProfessorAnuncio {
-  final int tipo;
-  final String? nome;
+  final int tipo_usuario;
+  final String nome;
   final String? email;
   final String telefone;
   final String descricao;
   final double preco;
   final String materia;
   final String dia_semana;
-  final DateTime horario_comeco;
-  final DateTime horario_fim;
+  final String horario_comeco;
+  final String horario_fim;
   EntityProfessorAnuncio({
-    required this.tipo,
-    this.nome,
+    required this.tipo_usuario,
+    required this.nome,
     this.email,
     required this.telefone,
     required this.descricao,
@@ -204,7 +204,7 @@ class EntityProfessorAnuncio {
   });
 
   EntityProfessorAnuncio copyWith({
-    int? tipo,
+    int? tipo_usuario,
     String? nome,
     String? email,
     String? telefone,
@@ -212,11 +212,11 @@ class EntityProfessorAnuncio {
     double? preco,
     String? materia,
     String? dia_semana,
-    DateTime? horario_comeco,
-    DateTime? horario_fim,
+    String? horario_comeco,
+    String? horario_fim,
   }) {
     return EntityProfessorAnuncio(
-      tipo: tipo ?? this.tipo,
+      tipo_usuario: tipo_usuario ?? this.tipo_usuario,
       nome: nome ?? this.nome,
       email: email ?? this.email,
       telefone: telefone ?? this.telefone,
@@ -231,7 +231,7 @@ class EntityProfessorAnuncio {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      "tipo": tipo,
+      "tipo_usuario": tipo_usuario,
       "nome": nome,
       "email": email,
       "telefone": telefone,
@@ -239,14 +239,14 @@ class EntityProfessorAnuncio {
       "preco": preco,
       "materia": materia,
       "dia_semana": dia_semana,
-      "horario_comeco": horario_comeco.toUtc().toIso8601String(),
-      "horario_fim": horario_fim.toUtc().toIso8601String(),
+      "horario_comeco": horario_comeco,
+      "horario_fim": horario_fim,
     };
   }
 
   factory EntityProfessorAnuncio.fromMap(Map<String, dynamic> map) {
     return EntityProfessorAnuncio(
-      tipo: map["tipo"]?.toInt(),
+      tipo_usuario: map["tipo_usuario"]?.toInt(),
       nome: map["nome"],
       email: map["email"],
       telefone: map["telefone"],
@@ -254,12 +254,29 @@ class EntityProfessorAnuncio {
       preco: map["preco"]?.toDouble(),
       materia: map["materia"],
       dia_semana: map["dia_semana"],
-      horario_comeco: DateTime.parse(map["horario_comeco"]).toLocal(),
-      horario_fim: DateTime.parse(map["horario_fim"]).toLocal(),
+      horario_comeco: map["horario_comeco"],
+      horario_fim: map["horario_fim"],
     );
   }
 
   String toJson() => json.encode(toMap());
 
   factory EntityProfessorAnuncio.fromJson(String source) => EntityProfessorAnuncio.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return "EntityProfessorAnuncio(tipo_usuario: $tipo_usuario, nome: $nome, email: $email, telefone: $telefone, descricao: $descricao, preco: $preco, materia: $materia, dia_semana: $dia_semana, horario_comeco: $horario_comeco, horario_fim: $horario_fim)";
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is EntityProfessorAnuncio && other.tipo_usuario == tipo_usuario && other.nome == nome && other.email == email && other.telefone == telefone && other.descricao == descricao && other.preco == preco && other.materia == materia && other.dia_semana == dia_semana && other.horario_comeco == horario_comeco && other.horario_fim == horario_fim;
+  }
+
+  @override
+  int get hashCode {
+    return tipo_usuario.hashCode ^ nome.hashCode ^ email.hashCode ^ telefone.hashCode ^ descricao.hashCode ^ preco.hashCode ^ materia.hashCode ^ dia_semana.hashCode ^ horario_comeco.hashCode ^ horario_fim.hashCode;
+  }
 }
