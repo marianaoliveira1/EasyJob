@@ -2,25 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 import '../utils/colors.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
-class CardTeacher extends StatelessWidget {
-  const CardTeacher({super.key});
+class CardTeacher extends StatefulWidget {
+  const CardTeacher({super.key, required this.nome, required this.preco, required this.materia, required this.descricao});
+
+  final String nome;
+  final double preco;
+  final String materia;
+  final String descricao;
 
   @override
+  State<CardTeacher> createState() => _CardTeacherState();
+}
+
+class _CardTeacherState extends State<CardTeacher> {
+  @override
   Widget build(BuildContext context) {
-    const String baseUrl = 'http://localhost:8080/swagger-ui.html#';
-
-    Future<String?> dados(String nome, String materia, String descricao) async {
-      final url = Uri.parse('$baseUrl/login');
-      final response = await http.post(url, body: {
-        'nome': nome,
-        'materia': materia,
-        'descricao': descricao,
-      });
-    }
-
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
@@ -44,7 +41,7 @@ class CardTeacher extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "",
+                  widget.nome,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: title),
                   textAlign: TextAlign.start,
                 ),
@@ -59,7 +56,7 @@ class CardTeacher extends StatelessWidget {
                       style: TextStyle(fontSize: 18, color: title),
                     ),
                     Text(
-                      "R\$ 70,00",
+                      widget.nome,
                       style: TextStyle(fontSize: 18, color: title, fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -75,7 +72,7 @@ class CardTeacher extends StatelessWidget {
                       style: TextStyle(fontSize: 18, color: title),
                     ),
                     Text(
-                      "Matemática",
+                      widget.materia,
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: title),
                       textAlign: TextAlign.start,
                     ),
@@ -85,22 +82,24 @@ class CardTeacher extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  "Professora de matemática com 15 anos de experiência, tanto em escola públicas quanto privadas",
+                  widget.descricao,
                   style: TextStyle(fontSize: 18, color: title),
                 ),
                 SizedBox(
                   height: 20,
                 ),
                 Container(
-                    width: double.infinity,
-                    height: 45,
-                    color: Color(0xff5E2EC4),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Detalhes do professor",
-                          style: TextStyle(color: title, fontSize: 18, fontWeight: FontWeight.w500),
-                        )))
+                  width: double.infinity,
+                  height: 45,
+                  color: Color(0xff5E2EC4),
+                  child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Detalhes do professor",
+                      style: TextStyle(color: title, fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                )
               ],
             ),
           ),

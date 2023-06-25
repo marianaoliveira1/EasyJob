@@ -2,15 +2,10 @@ import 'dart:async';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'package:easyjobfrontend/controller/controller.dart';
-import 'package:easyjobfrontend/features/student/screens/register_student.dart';
-import 'package:easyjobfrontend/features/teachers/screens/register_teacher.dart';
-import 'package:easyjobfrontend/screens/login/server/usuario_server.dart';
+import 'package:easyjobfrontend/screens/register/register_screen.dart';
+
 import 'package:easyjobfrontend/widgtes/gradient_background.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../utils/colors.dart';
 

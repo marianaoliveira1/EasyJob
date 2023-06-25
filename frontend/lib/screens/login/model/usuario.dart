@@ -178,3 +178,88 @@ class EntityMateriasDtorequest {
   @override
   int get hashCode => descricao.hashCode ^ id.hashCode;
 }
+
+class EntityProfessorAnuncio {
+  final int tipo;
+  final String? nome;
+  final String? email;
+  final String telefone;
+  final String descricao;
+  final double preco;
+  final String materia;
+  final String dia_semana;
+  final DateTime horario_comeco;
+  final DateTime horario_fim;
+  EntityProfessorAnuncio({
+    required this.tipo,
+    this.nome,
+    this.email,
+    required this.telefone,
+    required this.descricao,
+    required this.preco,
+    required this.materia,
+    required this.dia_semana,
+    required this.horario_comeco,
+    required this.horario_fim,
+  });
+
+  EntityProfessorAnuncio copyWith({
+    int? tipo,
+    String? nome,
+    String? email,
+    String? telefone,
+    String? descricao,
+    double? preco,
+    String? materia,
+    String? dia_semana,
+    DateTime? horario_comeco,
+    DateTime? horario_fim,
+  }) {
+    return EntityProfessorAnuncio(
+      tipo: tipo ?? this.tipo,
+      nome: nome ?? this.nome,
+      email: email ?? this.email,
+      telefone: telefone ?? this.telefone,
+      descricao: descricao ?? this.descricao,
+      preco: preco ?? this.preco,
+      materia: materia ?? this.materia,
+      dia_semana: dia_semana ?? this.dia_semana,
+      horario_comeco: horario_comeco ?? this.horario_comeco,
+      horario_fim: horario_fim ?? this.horario_fim,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      "tipo": tipo,
+      "nome": nome,
+      "email": email,
+      "telefone": telefone,
+      "descricao": descricao,
+      "preco": preco,
+      "materia": materia,
+      "dia_semana": dia_semana,
+      "horario_comeco": horario_comeco.toUtc().toIso8601String(),
+      "horario_fim": horario_fim.toUtc().toIso8601String(),
+    };
+  }
+
+  factory EntityProfessorAnuncio.fromMap(Map<String, dynamic> map) {
+    return EntityProfessorAnuncio(
+      tipo: map["tipo"]?.toInt(),
+      nome: map["nome"],
+      email: map["email"],
+      telefone: map["telefone"],
+      descricao: map["descricao"],
+      preco: map["preco"]?.toDouble(),
+      materia: map["materia"],
+      dia_semana: map["dia_semana"],
+      horario_comeco: DateTime.parse(map["horario_comeco"]).toLocal(),
+      horario_fim: DateTime.parse(map["horario_fim"]).toLocal(),
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory EntityProfessorAnuncio.fromJson(String source) => EntityProfessorAnuncio.fromMap(json.decode(source));
+}

@@ -5,9 +5,9 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:postgres/postgres.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../utils/default_voltar_button.dart';
-import '../../../utils/colors.dart';
-import '../../../widgtes/gradient_background.dart';
+import '../../utils/default_voltar_button.dart';
+import '../../utils/colors.dart';
+import '../../widgtes/gradient_background.dart';
 
 final supabase = Supabase.instance.client;
 

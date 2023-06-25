@@ -1,4 +1,6 @@
+import 'package:easyjobfrontend/controller/controller_anuncio_professor.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../utils/colors.dart';
 import '../../../widgtes/card_teacher.dart';
@@ -12,15 +14,9 @@ class HomeScreenStudent extends StatefulWidget {
 }
 
 class _HomeScreenStudentState extends State<HomeScreenStudent> {
-  Map<String, bool> checkBoxValues = {
-    'Matemática': false,
-    'Português': false,
-    'História': false,
-    'Geografia': false,
-    'Produção Textual': false,
-  };
   @override
   Widget build(BuildContext context) {
+    var cProfessores = Get.find<ControllerAnuncioProfessor>();
     return Scaffold(
       body: Stack(
         children: [
@@ -50,10 +46,14 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
               ],
             ),
           ),
-          Column(
-            children: [],
-          )
-          // CardTeacher()
+          Obx(() {
+            return GridView.count(
+              crossAxisCount: 3,
+              children: [
+                for (var prof in cProfessores.professor_anuncio) Text(prof.nome ?? ''),
+              ],
+            );
+          }),
         ],
       ),
     );

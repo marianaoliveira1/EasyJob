@@ -4,7 +4,7 @@ import 'package:easyjobfrontend/screens/login/model/usuario.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../features/student/screens/register_student.dart';
+import '../screens/register/register_screen.dart';
 
 class ControllerAutenticacao extends GetxController {
   // ! Estado
@@ -15,10 +15,9 @@ class ControllerAutenticacao extends GetxController {
   @override
   void onInit() {
     Supabase.instance.client.auth.onAuthStateChange.listen((event) async {
-      print("dlsds");
       user.value = event.session?.user;
 
-      final response = await supabase.from('users').select().eq('email', user.value?.email).execute();
+      final response = await supabase.from('usuario').select().eq('email', user.value?.email).execute();
       usuario.value = EntityUsuario.fromMap(response.data[0]);
       if (usuario.value?.tipo == 0) {
         Get.toNamed('/cadastroprofessor');

@@ -1,5 +1,5 @@
 import 'package:easyjobfrontend/controller/controller.dart';
-import 'package:easyjobfrontend/features/student/screens/register_student.dart';
+import 'package:easyjobfrontend/controller/controller_anuncio_professor.dart';
 import 'package:easyjobfrontend/features/teachers/screens/profile_teacher.dart';
 import 'package:easyjobfrontend/features/teachers/screens/register_teacher.dart';
 import 'package:easyjobfrontend/screens/login/login_screen.dart';
@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(ControllerAutenticacao());
+    Get.put(ControllerAnuncioProfessor());
 
     return GetMaterialApp(
       title: "EasyJob",
@@ -37,11 +38,6 @@ class MyApp extends StatelessWidget {
           page: () => LoginScreen(),
           transition: Transition.downToUp,
         ),
-        // GetPage(
-        //   name: '/cadastropai',
-        //   page: () => RegisterStudent(),
-        //   transition: Transition.downToUp,
-        // ),
         GetPage(
           name: '/cadastro',
           page: () => RegisterTeacher(),
@@ -50,6 +46,11 @@ class MyApp extends StatelessWidget {
         GetPage(
           name: '/home',
           page: () => HomeScreenStudent(),
+          transition: Transition.downToUp,
+        ),
+        GetPage(
+          name: '/cadastroprofessor',
+          page: () => RegisterTeacher(),
           transition: Transition.downToUp,
         ),
         GetPage(
