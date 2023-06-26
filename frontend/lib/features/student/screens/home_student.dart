@@ -1,4 +1,5 @@
 import 'package:easyjobfrontend/controller/controller_anuncio_professor.dart';
+import 'package:easyjobfrontend/screens/login/model/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -36,11 +37,12 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
                     ),
                     Expanded(
                       child: TextField(
-                        style: TextStyle(color: Colors.white),
+                        controller: cProfessores.pesquisacontroller,
+                        style: TextStyle(color: title),
                         decoration: InputDecoration(
-                          prefixIcon: Icon(Icons.search, color: Colors.white),
+                          prefixIcon: Icon(Icons.search, color: title),
                           labelText: 'Pesquise por um um professor',
-                          labelStyle: TextStyle(color: Colors.white),
+                          labelStyle: TextStyle(color: title),
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -50,19 +52,29 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
                 SizedBox(
                   height: 40,
                 ),
-                Expanded(
-                  child: Obx(() {
-                    return GridView.count(
-                      crossAxisCount: 3,
-                      children: [
-                        for (var prof in cProfessores.professor_anuncio)
-                          CardTeacher(
-                            profanuncio: prof,
-                          )
-                      ],
-                    );
-                  }),
-                )
+                Expanded(child: Obx(() {
+                  // ! declara uma lista
+                  // ! coloca o valor do professor_anuncio na lista
+                  // ! filtra a lista
+                  // ! us a lista nova no for
+                  List<EntityProfessorAnuncio> anunciosProfessorFiltrado = cProfessores.anunciosProfessor
+                      .where(
+                        (prof) => prof.nome.contains(
+                          cProfessores.pesquisacontroller.text,
+                        ),
+                      )
+                      .toList();
+
+                  return GridView.count(
+                    crossAxisCount: 3,
+                    children: [
+                      for (var prof in anunciosProfessorFiltrado)
+                        CardTeacher(
+                          profanuncio: prof,
+                        )
+                    ],
+                  );
+                }))
               ],
             ),
           ),
