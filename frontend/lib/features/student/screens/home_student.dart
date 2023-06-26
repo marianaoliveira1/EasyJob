@@ -67,10 +67,14 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
 
                   return GridView.count(
                     crossAxisCount: 3,
+                    childAspectRatio: MediaQuery.of(context).size.aspectRatio * 0.7,
                     children: [
                       for (var prof in anunciosProfessorFiltrado)
-                        CardTeacher(
-                          profanuncio: prof,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CardTeacher(
+                            profanuncio: prof,
+                          ),
                         )
                     ],
                   );

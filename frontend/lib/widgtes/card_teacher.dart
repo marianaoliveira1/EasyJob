@@ -27,7 +27,7 @@ class _CardTeacherState extends State<CardTeacher> {
       ),
       strokeWidth: 2,
       radius: Radius.circular(16),
-      child: Padding(
+      child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
