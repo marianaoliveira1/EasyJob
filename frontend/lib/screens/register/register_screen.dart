@@ -1,11 +1,12 @@
+import 'package:easyjobfrontend/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:postgres/postgres.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../utils/default_voltar_button.dart';
 import '../../utils/colors.dart';
 import '../../widgtes/gradient_background.dart';
 
@@ -57,85 +58,42 @@ class _RegisterStudentState extends State<RegisterStudent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Row(
         children: [
-          DefaultBackgroundGradient(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 270.0),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 150, left: 100, right: 60),
+                child: SvgPicture.asset(
+                  "assets/register-screen.svg",
+                  width: 500,
+                  height: 500,
+                ),
+              )
+            ],
+          ),
+          Expanded(
             child: Form(
               key: _formKay,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 10,
-                  ),
-                  DefaultVoltarButton(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "O primeiro passo, é preencher esse formulário de inscrição.",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26, color: title),
-                  ),
-                  SizedBox(
-                    height: 120,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Nome completo',
-                      filled: true,
-                      fillColor: Colors.transparent,
-                      hintStyle: TextStyle(color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16.0),
-                        borderSide: BorderSide(
-                          color: backgroundModal,
-                          width: 1.0, // Defina a espessura da borda conforme necessário
-                        ),
-                      ),
+              child: Container(
+                padding: EdgeInsets.only(left: 70, right: 150),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20,
                     ),
-                    controller: _nomecontroller,
-                    validator: (name) {
-                      if (name == null || name.isEmpty) {
-                        return "Digite o seu nome";
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Seu email',
-                      filled: true,
-                      fillColor: Colors.transparent,
-                      hintStyle: TextStyle(color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16.0),
-                        borderSide: BorderSide(
-                          color: backgroundModal,
-                          width: 1.0, // Defina a espessura da borda conforme necessário
-                        ),
-                      ),
+                    Text(
+                      "Crie uma nova conta para aproveitar todos os recursos disponíveis.",
+                      style: TextStyle(fontSize: 28, color: Colors.black, fontWeight: FontWeight.w600),
                     ),
-                    controller: _emailController,
-                    validator: (email) {
-                      if (email == null || email.isEmpty) {
-                        return "Digite o seu email";
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                      obscureText: true,
+                    SizedBox(
+                      height: 50,
+                    ),
+                    TextFormField(
                       decoration: InputDecoration(
-                        hintText: 'Sua senha',
+                        hintText: 'Nome completo',
                         filled: true,
                         fillColor: Colors.transparent,
                         hintStyle: TextStyle(color: Colors.black),
@@ -147,40 +105,120 @@ class _RegisterStudentState extends State<RegisterStudent> {
                           ),
                         ),
                       ),
-                      controller: _passwordController,
-                      validator: (senha) {
-                        if (senha == null || senha.isEmpty) {
-                          return "Digite a senha";
-                        } else if (senha.length < 5) {
-                          return "Digite uma senha maior que 5 caracteres";
+                      controller: _nomecontroller,
+                      validator: (name) {
+                        if (name == null || name.isEmpty) {
+                          return "Digite o seu nome";
                         }
                         return null;
-                      }),
-                  SizedBox(
-                    height: 100,
-                  ),
-                  SizedBox(
-                    width: 270,
-                    height: 48,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKay.currentState!.validate()) {
-                          _registro(context);
-                        }
                       },
-                      child: Text(
-                        'Fazer cadastro',
-                        style: TextStyle(fontSize: 22),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Seu email',
+                        filled: true,
+                        fillColor: Colors.transparent,
+                        hintStyle: TextStyle(color: Colors.black),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16.0),
+                          borderSide: BorderSide(
+                            color: backgroundModal,
+                            width: 1.0, // Defina a espessura da borda conforme necessário
+                          ),
+                        ),
                       ),
-                      style: ElevatedButton.styleFrom(
-                        primary: backgroundButton,
+                      controller: _emailController,
+                      validator: (email) {
+                        if (email == null || email.isEmpty) {
+                          return "Digite o seu email";
+                        }
+                        return null;
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          hintText: 'Sua senha',
+                          filled: true,
+                          fillColor: Colors.transparent,
+                          hintStyle: TextStyle(color: Colors.black),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                            borderSide: BorderSide(
+                              color: backgroundModal,
+                              width: 1.0, // Defina a espessura da borda conforme necessário
+                            ),
+                          ),
+                        ),
+                        controller: _passwordController,
+                        validator: (senha) {
+                          if (senha == null || senha.isEmpty) {
+                            return "Digite a senha";
+                          } else if (senha.length < 5) {
+                            return "Digite uma senha maior que 5 caracteres";
+                          }
+                          return null;
+                        }),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Já tem uma conta?",
+                          style: TextStyle(color: subtitle),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => LoginScreen()),
+                            );
+                          },
+                          child: Text(
+                            "Fazer login",
+                            style: TextStyle(color: title),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    SizedBox(
+                      width: 270,
+                      height: 48,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKay.currentState!.validate()) {
+                            _registro(context);
+                          }
+                        },
+                        child: Text(
+                          'Fazer cadastro',
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          primary: backgroundButton,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

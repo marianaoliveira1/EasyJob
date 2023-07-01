@@ -1,11 +1,11 @@
 import 'package:easyjobfrontend/controller/controller.dart';
 import 'package:easyjobfrontend/controller/controller_anuncio_professor.dart';
-import 'package:easyjobfrontend/features/teachers/screens/profile_teacher.dart';
 import 'package:easyjobfrontend/features/teachers/screens/register_teacher.dart';
 import 'package:easyjobfrontend/screens/login/login_screen.dart';
 import 'package:easyjobfrontend/screens/welcome/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'features/student/screens/home_student.dart';
 
@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: "EasyJob",
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)),
       getPages: [
         GetPage(
           name: '/',

@@ -53,15 +53,11 @@ class _HomeScreenStudentState extends State<HomeScreenStudent> {
                   height: 40,
                 ),
                 Expanded(child: Obx(() {
-                  // ! declara uma lista
-                  // ! coloca o valor do professor_anuncio na lista
-                  // ! filtra a lista
-                  // ! us a lista nova no for
                   List<EntityProfessorAnuncio> anunciosProfessorFiltrado = cProfessores.anunciosProfessor
                       .where(
-                        (prof) => prof.nome.contains(
-                          cProfessores.pesquisacontroller.text,
-                        ),
+                        (prof) => prof.nome.toLowerCase().contains(
+                              cProfessores.filter.toLowerCase(),
+                            ),
                       )
                       .toList();
 

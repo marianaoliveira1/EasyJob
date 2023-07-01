@@ -1,5 +1,5 @@
 import 'package:easyjobfrontend/screens/login/model/usuario.dart';
-import 'package:easyjobfrontend/utils/default_voltar_button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -23,7 +23,7 @@ class _ProfileTeacherScreenState extends State<ProfileTeacherScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          DefaultVoltarButton(),
+          DefaultBackgroundGradient(),
           Padding(
             padding: EdgeInsets.all(50),
             child: Row(
@@ -35,7 +35,7 @@ class _ProfileTeacherScreenState extends State<ProfileTeacherScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
-                        height: 120,
+                        height: 50,
                       ),
                       Container(
                         width: 130,
@@ -54,69 +54,37 @@ class _ProfileTeacherScreenState extends State<ProfileTeacherScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        widget.profanuncio.descricao,
-                        style: TextStyle(fontSize: 25, color: title, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        widget.profanuncio.dia_semana,
-                        style: TextStyle(fontSize: 18, color: title),
-                      ),
-                      Text(
-                        "Horario de inicio: " + widget.profanuncio.horario_comeco,
-                        style: TextStyle(fontSize: 18, color: title),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Horario de termino: " + widget.profanuncio.horario_fim,
-                        style: TextStyle(fontSize: 18, color: title),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Container(
-                  width: 700,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 150,
+                        height: 40,
                       ),
                       Text(
                         widget.profanuncio.nome,
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, color: title),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: title),
                         textAlign: TextAlign.start,
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 40,
+                      ),
+                      Text(
+                        widget.profanuncio.descricao,
+                        style: TextStyle(fontSize: 23, color: subtitleprofessor, fontWeight: FontWeight.w500),
+                      ),
+                      SizedBox(
+                        height: 40,
                       ),
                       Row(
                         children: [
                           Text(
                             "Preço por hora:",
-                            style: TextStyle(fontSize: 20, color: title),
+                            style: TextStyle(fontSize: 23, color: title),
                             textAlign: TextAlign.start,
                           ),
                           SizedBox(
-                            width: 10,
+                            width: 60,
                           ),
                           Text(
-                            widget.profanuncio.preco.toString(),
+                            "R\S " + widget.profanuncio.preco.toString(),
                             style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 23,
                               color: title,
                               fontWeight: FontWeight.bold,
                             ),
@@ -125,35 +93,53 @@ class _ProfileTeacherScreenState extends State<ProfileTeacherScreen> {
                         ],
                       ),
                       SizedBox(
-                        height: 10,
+                        height: 40,
                       ),
-                      ElevatedButton.icon(
-                        onPressed: () {
-                          // Ação quando o botão é pressionado
-                        },
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
-                          shape: RoundedRectangleBorder(
+                      Text(
+                        widget.profanuncio.dia_semana,
+                        style: TextStyle(fontSize: 23, color: title),
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Text(
+                        "Horario de inicio: " + widget.profanuncio.horario_comeco,
+                        style: TextStyle(fontSize: 23, color: title),
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Text(
+                        "Horario de termino: " + widget.profanuncio.horario_fim,
+                        style: TextStyle(fontSize: 23, color: title),
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Container(
+                          height: 40,
+                          width: 270,
+                          decoration: BoxDecoration(
+                            color: Colors.green,
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                        ),
-                        icon: SvgPicture.asset(
-                          'assets/zap-icon.png',
-                          width: 24,
-                          height: 24,
-                          color: Colors.white,
-                        ),
-                        label: Text(
-                          'Entre em contato pelo WhatsApp',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
+                          child: Center(
+                            child: Text(
+                              'Entre em contato pelo WhatsApp',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16,
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      )
                     ],
                   ),
-                )
+                ),
               ],
             ),
           )

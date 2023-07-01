@@ -19,8 +19,8 @@ class _CardTeacherState extends State<CardTeacher> {
     return OutlineGradientButton(
       gradient: LinearGradient(
         colors: [
-          Color(0xff5E2EC4),
-          Color(0xff4150D7)
+          Color.fromARGB(255, 0, 45, 107),
+          Color.fromARGB(255, 4, 25, 54),
         ],
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
@@ -45,29 +45,23 @@ class _CardTeacherState extends State<CardTeacher> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Preço por aula/hora ",
-                  style: TextStyle(fontSize: 18, color: title),
-                ),
-                Text(
-                  widget.profanuncio.preco.toString(),
-                  style: TextStyle(fontSize: 18, color: title, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Matéria",
-                  style: TextStyle(fontSize: 18, color: title),
-                ),
-                Text(
                   widget.profanuncio.materia,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: title),
                   textAlign: TextAlign.start,
+                ),
+                Container(
+                  width: 130,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14.0),
+                    color: backgroundButton,
+                  ),
+                  child: Center(
+                    child: Text(
+                      "R\$ " + widget.profanuncio.preco.toString() + "/h",
+                      style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w400),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -84,7 +78,10 @@ class _CardTeacherState extends State<CardTeacher> {
             Container(
               width: double.infinity,
               height: 45,
-              color: Color(0xff5E2EC4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14.0),
+                color: backgroundButton,
+              ),
               child: TextButton(
                 onPressed: () {
                   Navigator.push(

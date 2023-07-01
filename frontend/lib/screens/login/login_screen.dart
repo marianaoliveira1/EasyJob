@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter_svg/svg.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:easyjobfrontend/screens/register/register_screen.dart';
@@ -33,115 +34,129 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Row(
         children: [
-          DefaultBackgroundGradient(),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 270.0),
-            child: Form(
-              key: _formKay,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 150,
-                  ),
-                  Text(
-                    "Olá",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26, color: title),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "bem vindo de volta",
-                    style: TextStyle(fontSize: 18, color: subtitle),
-                  ),
-                  SizedBox(
-                    height: 70,
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Seu email',
-                      filled: true,
-                      fillColor: Colors.transparent,
-                      hintStyle: TextStyle(color: Colors.black),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16.0),
-                        borderSide: BorderSide(
-                          color: backgroundModal,
-                          width: 1.0, // Defina a espessura da borda conforme necessário
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 150, left: 100, right: 60),
+                child: SvgPicture.asset(
+                  "assets/login-screen.svg",
+                  width: 500,
+                  height: 500,
+                ),
+              )
+            ],
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                Form(
+                  key: _formKay,
+                  child: Container(
+                    padding: EdgeInsets.only(left: 70, right: 150),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 200,
                         ),
-                      ),
-                    ),
-                    controller: _emailController,
-                    validator: (email) {
-                      if (email == null || email.isEmpty) {
-                        return "Digite o seu email";
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'Sua senha',
-                        fillColor: Colors.transparent,
-                        hintStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(16.0),
-                          borderSide: BorderSide(
-                            color: backgroundModal,
-                            width: 1.0, // Defina a espessura da borda conforme necessário
+                        Text(
+                          "Faça login para acessar sua conta.",
+                          style: TextStyle(fontSize: 28, color: Colors.black, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: 'Seu email',
+                            filled: true,
+                            fillColor: Colors.transparent,
+                            hintStyle: TextStyle(color: Colors.black),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16.0),
+                              borderSide: BorderSide(
+                                color: backgroundModal,
+                                width: 1.0, // Defina a espessura da borda conforme necessário
+                              ),
+                            ),
+                          ),
+                          controller: _emailController,
+                          validator: (email) {
+                            if (email == null || email.isEmpty) {
+                              return "Digite o seu email";
+                            }
+                            return null;
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextFormField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              hintText: 'Sua senha',
+                              fillColor: Colors.transparent,
+                              hintStyle: TextStyle(color: Colors.black),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(16.0),
+                                borderSide: BorderSide(
+                                  color: backgroundModal,
+                                  width: 1.0, // Defina a espessura da borda conforme necessário
+                                ),
+                              ),
+                            ),
+                            controller: _passwordController,
+                            validator: (senha) {
+                              if (senha == null || senha.isEmpty) {
+                                return "Digite a senha";
+                              }
+                              return null;
+                            }),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Text(
+                              "Não tem uma conta?",
+                              style: TextStyle(color: subtitle),
+                            ),
+                            RegistrationOption()
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        SizedBox(
+                          width: 270,
+                          height: 48,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (_formKay.currentState!.validate()) {
+                                _login(context);
+                              }
+                            },
+                            child: Text(
+                              'Entrar',
+                              style: TextStyle(fontSize: 22),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: backgroundButton,
+                            ),
                           ),
                         ),
-                      ),
-                      controller: _passwordController,
-                      validator: (senha) {
-                        if (senha == null || senha.isEmpty) {
-                          return "Digite a senha";
-                        }
-                        return null;
-                      }),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    Text(
-                      "Não tem uma conta?",
-                      style: TextStyle(color: title),
-                    ),
-                    RegistrationOption()
-                  ]),
-                  SizedBox(
-                    height: 200,
-                  ),
-                  SizedBox(
-                    width: 270,
-                    height: 48,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        if (_formKay.currentState!.validate()) {
-                          _login(context);
-                        }
-                      },
-                      child: Text(
-                        'Fazer login',
-                        style: TextStyle(fontSize: 22),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        primary: backgroundButton,
-                      ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -213,7 +228,7 @@ class RegistrationOption extends StatelessWidget {
       },
       child: Text(
         "Cadastre-se",
-        style: TextStyle(color: title, fontWeight: FontWeight.bold),
+        style: TextStyle(color: title),
       ),
     );
   }
