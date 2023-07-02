@@ -1,109 +1,104 @@
+import 'package:easyjobfrontend/features/teachers/screens/profile_teacher.dart';
+import 'package:easyjobfrontend/screens/login/model/usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_gradient_button/outline_gradient_button.dart';
 
 import '../utils/colors.dart';
-import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
-class CardTeacher extends StatelessWidget {
-  const CardTeacher({super.key});
+class CardTeacher extends StatefulWidget {
+  const CardTeacher({super.key, required this.profanuncio});
 
+  final EntityProfessorAnuncio profanuncio;
+  @override
+  State<CardTeacher> createState() => _CardTeacherState();
+}
+
+class _CardTeacherState extends State<CardTeacher> {
   @override
   Widget build(BuildContext context) {
-    const String baseUrl = 'http://localhost:8080/swagger-ui.html#';
-
-    Future<String?> dados(String nome, String materia, String descricao) async {
-      final url = Uri.parse('$baseUrl/login');
-      final response = await http.post(url, body: {
-        'nome': nome,
-        'materia': materia,
-        'descricao': descricao,
-      });
-    }
-
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Container(
-        height: 285,
-        width: 478,
-        child: OutlineGradientButton(
-          gradient: LinearGradient(
-            colors: [
-              Color(0xff5E2EC4),
-              Color(0xff4150D7)
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          strokeWidth: 2,
-          radius: Radius.circular(16),
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return OutlineGradientButton(
+      gradient: LinearGradient(
+        colors: [
+          Color.fromARGB(255, 0, 45, 107),
+          Color.fromARGB(255, 4, 25, 54),
+        ],
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+      ),
+      strokeWidth: 2,
+      radius: Radius.circular(16),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.profanuncio.nome,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: title),
+              textAlign: TextAlign.start,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: title),
+                  widget.profanuncio.materia,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: title),
                   textAlign: TextAlign.start,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Preço por aula/hora ",
-                      style: TextStyle(fontSize: 18, color: title),
-                    ),
-                    Text(
-                      "R\$ 70,00",
-                      style: TextStyle(fontSize: 18, color: title, fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Matéria ",
-                      style: TextStyle(fontSize: 18, color: title),
-                    ),
-                    Text(
-                      "Matemática",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: title),
-                      textAlign: TextAlign.start,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  "Professora de matemática com 15 anos de experiência, tanto em escola públicas quanto privadas",
-                  style: TextStyle(fontSize: 18, color: title),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
                 Container(
-                    width: double.infinity,
-                    height: 45,
-                    color: Color(0xff5E2EC4),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Detalhes do professor",
-                          style: TextStyle(color: title, fontSize: 18, fontWeight: FontWeight.w500),
-                        )))
+                  width: 130,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14.0),
+                    color: backgroundButton,
+                  ),
+                  child: Center(
+                    child: Text(
+                      "R\$ " + widget.profanuncio.preco.toString() + "/h",
+                      style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w400),
+                    ),
+                  ),
+                ),
               ],
             ),
-          ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              widget.profanuncio.descricao,
+              style: TextStyle(fontSize: 18, color: title),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: double.infinity,
+              height: 45,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14.0),
+                color: backgroundButton,
+              ),
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfileTeacherScreen(
+                              profanuncio: widget.profanuncio,
+                            )),
+                  );
+                },
+                child: Text(
+                  "Detalhes do professor",
+                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

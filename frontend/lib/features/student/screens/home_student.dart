@@ -1,4 +1,7 @@
+import 'package:easyjobfrontend/controller/controller_anuncio_professor.dart';
+import 'package:easyjobfrontend/screens/login/model/usuario.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../utils/colors.dart';
 import '../../../widgtes/card_teacher.dart';
@@ -12,48 +15,69 @@ class HomeScreenStudent extends StatefulWidget {
 }
 
 class _HomeScreenStudentState extends State<HomeScreenStudent> {
-  Map<String, bool> checkBoxValues = {
-    'Matemática': false,
-    'Português': false,
-    'História': false,
-    'Geografia': false,
-    'Produção Textual': false,
-  };
   @override
   Widget build(BuildContext context) {
+    var cProfessores = Get.find<ControllerAnuncioProfessor>();
     return Scaffold(
       body: Stack(
         children: [
           DefaultBackgroundGradient(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 20),
-            child: Row(
+            child: Column(
               children: [
-                Text(
-                  "EASYJOB",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: title),
+                Row(
+                  children: [
+                    Text(
+                      "EASYJOB",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: title),
+                    ),
+                    SizedBox(
+                      width: 18,
+                    ),
+                    Expanded(
+                      child: TextField(
+                        controller: cProfessores.pesquisacontroller,
+                        style: TextStyle(color: title),
+                        decoration: InputDecoration(
+                          prefixIcon: Icon(Icons.search, color: title),
+                          labelText: 'Pesquise por um um professor',
+                          labelStyle: TextStyle(color: title),
+                          border: OutlineInputBorder(),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  width: 18,
+                  height: 40,
                 ),
-                Expanded(
-                  child: TextField(
-                    style: TextStyle(color: Colors.white),
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.search, color: Colors.white),
-                      labelText: 'Pesquise por um um professor',
-                      labelStyle: TextStyle(color: Colors.white),
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
+                Expanded(child: Obx(() {
+                  List<EntityProfessorAnuncio> anunciosProfessorFiltrado = cProfessores.anunciosProfessor
+                      .where(
+                        (prof) => prof.nome.toLowerCase().contains(
+                              cProfessores.filter.toLowerCase(),
+                            ),
+                      )
+                      .toList();
+
+                  return GridView.count(
+                    crossAxisCount: 3,
+                    childAspectRatio: MediaQuery.of(context).size.aspectRatio * 0.7,
+                    children: [
+                      for (var prof in anunciosProfessorFiltrado)
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: CardTeacher(
+                            profanuncio: prof,
+                          ),
+                        )
+                    ],
+                  );
+                }))
               ],
             ),
           ),
-          Column(
-            children: [],
-          )
-          // CardTeacher()
         ],
       ),
     );

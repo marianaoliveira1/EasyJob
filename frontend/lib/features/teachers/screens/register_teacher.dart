@@ -4,8 +4,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:postgres/postgres.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../utils/default_voltar_button.dart';
 import '../../../utils/colors.dart';
 import '../../../widgtes/gradient_background.dart';
 
@@ -34,79 +34,11 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
   final FlutterSecureStorage _secureStorage = FlutterSecureStorage();
   late PostgreSQLConnection _connection;
 
-  @override
-  void initState() {
-    super.initState();
-    _connectToDatabase();
-  }
-
-  void _connectToDatabase() async {
-    _connection = PostgreSQLConnection(
-      'your_host',
-      5432,
-      'your_database',
-      username: 'your_username',
-      password: 'your_password',
-    );
-    await _connection.open();
-  }
-
-  void _registerUser() async {
-    if (_formKay.currentState!.validate()) {
-      String name = _namecontroller.text;
-      String email = _emailcontroller.text;
-      String password = _passwordcontroller.text;
-      String whatsapp = _whatsappcontrolle.text;
-      String city = _cidadecontrolle.text;
-      String state = _estadocontrolle.text;
-      String description = _sobrevocecontroller.text;
-      String subjects = _materiascontroller.text;
-      double price = double.parse(_precocontroller.text);
-      String days = _diascontroller.text;
-      String startTime = _decontroller.text;
-      String endTime = _atecontroller.text;
-
-      try {
-        await _connection.query(
-          "INSERT INTO users (name, email, password, whatsapp, city, state, description, subjects, price, days, start_time, end_time) VALUES (@name, @email, @password, @whatsapp, @city, @state, @description, @subjects, @price, @days, @start_time, @end_time)",
-          substitutionValues: {
-            'name': name,
-            'email': email,
-            'password': password,
-            'whatsapp': whatsapp,
-            'city': city,
-            'state': state,
-            'description': description,
-            'subjects': subjects,
-            'price': price,
-            'days': days,
-            'start_time': startTime,
-            'end_time': endTime,
-          },
-        );
-
-        // Exibe uma mensagem de sucesso
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('Sucesso'),
-              content: Text('Usuário cadastrado com sucesso!'),
-              actions: <Widget>[
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
-      } catch (e) {
-        print('Erro durante o cadastro: $e');
-      }
-    }
+  Future<void> _registro(BuildContext context) async {
+    final email = _emailcontroller.text;
+    final password = _passwordcontroller.text;
+    final name = _namecontroller.text;
+    await Supabase.instance.client.auth.signUp(password: password, email: email);
   }
 
   @override
@@ -132,7 +64,6 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                       SizedBox(
                         height: 10,
                       ),
-                      DefaultVoltarButton(),
                       SizedBox(
                         height: 20,
                       ),
@@ -159,83 +90,6 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Nome completo',
-                          filled: true,
-                          fillColor: Colors.transparent,
-                          hintStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                            borderSide: BorderSide(
-                              color: backgroundModal,
-                              width: 1.0, // Defina a espessura da borda conforme necessário
-                            ),
-                          ),
-                        ),
-                        controller: _namecontroller,
-                        validator: (name) {
-                          if (name == null || name.isEmpty) {
-                            return "Digite o seu nome";
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: 'Email',
-                          filled: true,
-                          fillColor: Colors.transparent,
-                          hintStyle: TextStyle(color: Colors.black),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16.0),
-                            borderSide: BorderSide(
-                              color: backgroundModal,
-                              width: 1.0, // Defina a espessura da borda conforme necessário
-                            ),
-                          ),
-                        ),
-                        controller: _emailcontroller,
-                        validator: (email) {
-                          if (email == null || email.isEmpty) {
-                            return "Digite o seu email";
-                          }
-                          return null;
-                        },
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      TextFormField(
-                          obscureText: true,
-                          decoration: InputDecoration(
-                            hintText: 'Senha',
-                            filled: true,
-                            fillColor: Colors.transparent,
-                            hintStyle: TextStyle(color: Colors.black),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(16.0),
-                              borderSide: BorderSide(
-                                color: backgroundModal,
-                                width: 1.0, // Defina a espessura da borda conforme necessário
-                              ),
-                            ),
-                          ),
-                          controller: _passwordcontroller,
-                          validator: (senha) {
-                            if (senha == null || senha.isEmpty) {
-                              return "Digite a senha";
-                            } else if (senha.length < 5) {
-                              return "Digite uma senha maior que 5 caracteres";
-                            }
-                            return null;
-                          }),
                       SizedBox(
                         height: 20,
                       ),
@@ -509,7 +363,7 @@ class _RegisterTeacherState extends State<RegisterTeacher> {
                         child: ElevatedButton(
                           onPressed: () {
                             if (_formKay.currentState!.validate()) {
-                              _registerUser();
+                              _registro(context);
                               Get.toNamed('/perfildoprofessor');
                             }
                           },

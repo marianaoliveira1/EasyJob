@@ -1,64 +1,40 @@
 import 'dart:convert';
 
 class EntityUsuario {
+  final int tipo;
   final String? nome;
-  final String? senha;
   final String? email;
-  final String? tipo;
-  final EntityUsuarioEndereco endereco;
-  final EntityMateriasDtorequest materias;
-  final String? telefone;
   EntityUsuario({
+    required this.tipo,
     this.nome,
-    this.senha,
     this.email,
-    this.tipo,
-    required this.endereco,
-    required this.materias,
-    this.telefone,
   });
 
   EntityUsuario copyWith({
+    int? tipo,
     String? nome,
-    String? senha,
     String? email,
-    String? tipo,
-    EntityUsuarioEndereco? endereco,
-    EntityMateriasDtorequest? materias,
-    String? telefone,
   }) {
     return EntityUsuario(
-      nome: nome ?? this.nome,
-      senha: senha ?? this.senha,
-      email: email ?? this.email,
       tipo: tipo ?? this.tipo,
-      endereco: endereco ?? this.endereco,
-      materias: materias ?? this.materias,
-      telefone: telefone ?? this.telefone,
+      nome: nome ?? this.nome,
+      email: email ?? this.email,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      "nome": nome,
-      "senha": senha,
-      "email": email,
       "tipo": tipo,
-      "endereco": endereco.toMap(),
-      "materias": materias.toMap(),
-      "telefone": telefone,
+      "nome": nome,
+      "email": email,
     };
   }
 
   factory EntityUsuario.fromMap(Map<String, dynamic> map) {
     return EntityUsuario(
+      tipo: map["tipo"]?.toInt(),
       nome: map["nome"],
-      senha: map["senha"],
       email: map["email"],
-      tipo: map["tipo"],
-      endereco: EntityUsuarioEndereco.fromMap(map["endereco"]),
-      materias: EntityMateriasDtorequest.fromMap(map["materias"]),
-      telefone: map["telefone"],
     );
   }
 
@@ -67,21 +43,14 @@ class EntityUsuario {
   factory EntityUsuario.fromJson(String source) => EntityUsuario.fromMap(json.decode(source));
 
   @override
-  String toString() {
-    return "EntityUsuario(nome: $nome, senha: $senha, email: $email, tipo: $tipo, endereco: $endereco, materias: $materias, telefone: $telefone)";
-  }
-
-  @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is EntityUsuario && other.nome == nome && other.senha == senha && other.email == email && other.tipo == tipo && other.endereco == endereco && other.materias == materias && other.telefone == telefone;
+    return other is EntityUsuario && other.tipo == tipo && other.nome == nome && other.email == email;
   }
 
   @override
-  int get hashCode {
-    return nome.hashCode ^ senha.hashCode ^ email.hashCode ^ tipo.hashCode ^ endereco.hashCode ^ materias.hashCode ^ telefone.hashCode;
-  }
+  int get hashCode => tipo.hashCode ^ nome.hashCode ^ email.hashCode;
 }
 
 class EntityUsuarioEndereco {
@@ -208,4 +177,106 @@ class EntityMateriasDtorequest {
 
   @override
   int get hashCode => descricao.hashCode ^ id.hashCode;
+}
+
+class EntityProfessorAnuncio {
+  final int tipo_usuario;
+  final String nome;
+  final String? email;
+  final String telefone;
+  final String descricao;
+  final double preco;
+  final String materia;
+  final String dia_semana;
+  final String horario_comeco;
+  final String horario_fim;
+  EntityProfessorAnuncio({
+    required this.tipo_usuario,
+    required this.nome,
+    this.email,
+    required this.telefone,
+    required this.descricao,
+    required this.preco,
+    required this.materia,
+    required this.dia_semana,
+    required this.horario_comeco,
+    required this.horario_fim,
+  });
+
+  EntityProfessorAnuncio copyWith({
+    int? tipo_usuario,
+    String? nome,
+    String? email,
+    String? telefone,
+    String? descricao,
+    double? preco,
+    String? materia,
+    String? dia_semana,
+    String? horario_comeco,
+    String? horario_fim,
+  }) {
+    return EntityProfessorAnuncio(
+      tipo_usuario: tipo_usuario ?? this.tipo_usuario,
+      nome: nome ?? this.nome,
+      email: email ?? this.email,
+      telefone: telefone ?? this.telefone,
+      descricao: descricao ?? this.descricao,
+      preco: preco ?? this.preco,
+      materia: materia ?? this.materia,
+      dia_semana: dia_semana ?? this.dia_semana,
+      horario_comeco: horario_comeco ?? this.horario_comeco,
+      horario_fim: horario_fim ?? this.horario_fim,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      "tipo_usuario": tipo_usuario,
+      "nome": nome,
+      "email": email,
+      "telefone": telefone,
+      "descricao": descricao,
+      "preco": preco,
+      "materia": materia,
+      "dia_semana": dia_semana,
+      "horario_comeco": horario_comeco,
+      "horario_fim": horario_fim,
+    };
+  }
+
+  factory EntityProfessorAnuncio.fromMap(Map<String, dynamic> map) {
+    return EntityProfessorAnuncio(
+      tipo_usuario: map["tipo_usuario"]?.toInt(),
+      nome: map["nome"],
+      email: map["email"],
+      telefone: map["telefone"],
+      descricao: map["descricao"],
+      preco: map["preco"]?.toDouble(),
+      materia: map["materia"],
+      dia_semana: map["dia_semana"],
+      horario_comeco: map["horario_comeco"],
+      horario_fim: map["horario_fim"],
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory EntityProfessorAnuncio.fromJson(String source) => EntityProfessorAnuncio.fromMap(json.decode(source));
+
+  @override
+  String toString() {
+    return "EntityProfessorAnuncio(tipo_usuario: $tipo_usuario, nome: $nome, email: $email, telefone: $telefone, descricao: $descricao, preco: $preco, materia: $materia, dia_semana: $dia_semana, horario_comeco: $horario_comeco, horario_fim: $horario_fim)";
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is EntityProfessorAnuncio && other.tipo_usuario == tipo_usuario && other.nome == nome && other.email == email && other.telefone == telefone && other.descricao == descricao && other.preco == preco && other.materia == materia && other.dia_semana == dia_semana && other.horario_comeco == horario_comeco && other.horario_fim == horario_fim;
+  }
+
+  @override
+  int get hashCode {
+    return tipo_usuario.hashCode ^ nome.hashCode ^ email.hashCode ^ telefone.hashCode ^ descricao.hashCode ^ preco.hashCode ^ materia.hashCode ^ dia_semana.hashCode ^ horario_comeco.hashCode ^ horario_fim.hashCode;
+  }
 }
