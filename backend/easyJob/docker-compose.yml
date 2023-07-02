@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: easy_job_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 7654:5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
+
